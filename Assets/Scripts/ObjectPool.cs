@@ -41,6 +41,7 @@ public class ObjectPool : MonoBehaviour
 
     public GameObject GetObject(string tag, Vector3 positon, Quaternion rotation)
     {
+        //If try to get an object that doesn't exist in ObjectPool
         if (!_poolDictionary.ContainsKey(tag))
         {
             Debug.Log("Pool: " + tag + " does not exist");
@@ -50,6 +51,15 @@ public class ObjectPool : MonoBehaviour
         GameObject tempObj = _poolDictionary[tag].Dequeue();
         tempObj.transform.position = positon;
         tempObj.transform.rotation = rotation;
+
+        if (tempObj.GetComponent<Rigidbody2D>().bodyType == RigidbodyType2D.Dynamic)
+        {
+            tempObj.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        }
+        else
+        {
+            tempObj.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+        }
         tempObj.SetActive(true);
 
         _poolDictionary[tag].Enqueue(tempObj);
@@ -58,11 +68,6 @@ public class ObjectPool : MonoBehaviour
 
     public void SetObject(string tag, GameObject gameObject)
     {
-        if (!_poolDictionary.ContainsKey(tag))
-        {
-            Debug.Log("Pool: " + tag + " does not exist");
-        }
-        
         gameObject.SetActive(false);
         _poolDictionary[tag].Enqueue(gameObject);
     }

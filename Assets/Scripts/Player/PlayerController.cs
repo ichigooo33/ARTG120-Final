@@ -2,7 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
+using Cinemachine;
 using Unity.Collections;
+using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 using Quaternion = UnityEngine.Quaternion;
 using Vector2 = UnityEngine.Vector2;
@@ -20,10 +23,11 @@ public class PlayerController : MonoBehaviour
     public bool isGround = false;
     public bool facingRight = true;
     
-    [Header("Bullet Variables")]
+    [Header("Bullet/Platform Variables")]
     public float bulletForce;
     public float fireCollDownTime = 1;
     private float _fireCounter = 0;
+    public float platformForce;
 
     private Vector2 _screenCenter = new Vector2(Screen.width / 2, Screen.height / 2);
 
@@ -33,8 +37,11 @@ public class PlayerController : MonoBehaviour
 
     //Get Fire Point
     public Transform firePoint;
-
-    // Start is called before the first frame update
+    
+    //Private stuff used for control
+    private Vector2 _mousePos;
+    private Ray _fireRay;
+    
     void Start()
     {
         //Get player's own components
@@ -44,8 +51,16 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        //Update aim ray
+        _mousePos = new Vector2(Input.mousePosition.x - _screenCenter.x, Input.mousePosition.y - _screenCenter.y);
+        _fireRay = new Ray(firePoint.position, _mousePos);
+        Debug.DrawRay(_fireRay.origin, _fireRay.direction * 20, Color.red);
+        
         //Player fire
         Fire();
+        
+        //Player builds platform
+        BuildPlatform();
     }
 
     private void FixedUpdate()
@@ -101,10 +116,6 @@ public class PlayerController : MonoBehaviour
 
     private void Fire()
     {
-        Vector2 mousePos = new Vector2(Input.mousePosition.x - _screenCenter.x, Input.mousePosition.y - _screenCenter.y);
-        Ray fireRay = new Ray(firePoint.position, mousePos);
-        Debug.DrawRay(fireRay.origin, fireRay.direction * 20, Color.red);
-        
         if (Input.GetMouseButton(0) && _fireCounter > fireCollDownTime)
         {
             //Reset the counter
@@ -112,7 +123,16 @@ public class PlayerController : MonoBehaviour
             
             //Get bullet from the ObjectPool
             GameObject obj = ObjectPool.Instance.GetObject("Bullet", firePoint.position, Quaternion.identity);
-            obj.GetComponent<Rigidbody2D>().AddForce(fireRay.direction * bulletForce);
+            obj.GetComponent<Rigidbody2D>().AddForce(_fireRay.direction * bulletForce);
+        }
+    }
+
+    private void BuildPlatform()
+    {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            GameObject obj = ObjectPool.Instance.GetObject("Platform", firePoint.position, quaternion.identity);
+            obj.GetComponent<Rigidbody2D>().AddForce(_fireRay.direction * platformForce);
         }
     }
 }
