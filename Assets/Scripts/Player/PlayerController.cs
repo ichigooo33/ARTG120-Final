@@ -4,19 +4,24 @@ using System.Collections.Generic;
 using System.Numerics;
 using Unity.Collections;
 using UnityEngine;
+using Quaternion = UnityEngine.Quaternion;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
 
 public class PlayerController : MonoBehaviour
 {
     //Define Variables and Settings
+    [Header("Player Variables")]
     public float moveSpeed;
     public float jumpForce;
     public float playerWidth;
-
+    
+    [Header("Player Status")]
     public bool isGround = false;
     public bool facingRight = true;
-
+    
+    [Header("Bullet Variables")]
+    public float bulletForce;
     public float fireCollDownTime = 1;
     private float _fireCounter = 0;
 
@@ -26,9 +31,6 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D _rb;
     private SpriteRenderer _sr;
 
-    //Get Bullet Object
-    public GameObject bullet;
-    
     //Get Fire Point
     public Transform firePoint;
 
@@ -105,8 +107,12 @@ public class PlayerController : MonoBehaviour
         
         if (Input.GetMouseButton(0) && _fireCounter > fireCollDownTime)
         {
-            Debug.Log("FIRE!!!!!!");
+            //Reset the counter
             _fireCounter = 0;
+            
+            //Get bullet from the ObjectPool
+            GameObject obj = ObjectPool.Instance.GetObject("Bullet", firePoint.position, Quaternion.identity);
+            obj.GetComponent<Rigidbody2D>().AddForce(fireRay.direction * bulletForce);
         }
     }
 }
