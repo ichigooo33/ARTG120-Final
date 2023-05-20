@@ -16,7 +16,6 @@ public class Platform : MonoBehaviour
     {
         if (col.transform.CompareTag("Map"))
         {
-            Debug.Log(col.transform.name);
             _rb.bodyType = RigidbodyType2D.Static;
         }
     }
