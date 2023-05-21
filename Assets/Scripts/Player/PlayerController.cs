@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed;
     public float jumpForce;
     public float playerWidth;
+    public int fruitCount;
+    public Transform spawnPoint;
     
     [Header("Player Status")]
     public bool isGround = false;
@@ -84,20 +86,14 @@ public class PlayerController : MonoBehaviour
             if (horizontalInput < 0 && facingRight)
             {
                 //Turn left
-                _sr.flipX = !_sr.flipX;
+                transform.Rotate(Vector3.up, 180);
                 facingRight = false;
-                
-                //Update firePoint's position
-                firePoint.Translate(Vector3.left * playerWidth);
             }
             else if (horizontalInput > 0 && !facingRight)
             {
                 //Turn right
-                _sr.flipX = !_sr.flipX;
+                transform.Rotate(Vector3.up, 180);
                 facingRight = true;
-                
-                //Update firePoint's position
-                firePoint.Translate(-Vector3.left * playerWidth);
             }
 
             float tempVelocityY = _rb.velocity.y;
@@ -129,10 +125,34 @@ public class PlayerController : MonoBehaviour
 
     private void BuildPlatform()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F) && fruitCount > 0)
         {
-            GameObject obj = ObjectPool.Instance.GetObject("Platform", firePoint.position, quaternion.identity);
+            fruitCount--;
+            GameObject obj = ObjectPool.Instance.GetObject("F_Orange", firePoint.position, quaternion.identity);
             obj.GetComponent<Rigidbody2D>().AddForce(_fireRay.direction * platformForce);
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.transform.CompareTag("Fruit"))
+        {
+            Destroy(col.gameObject);
+            fruitCount++;
+        }
+
+        if (col.transform.CompareTag("DeadZone") || col.transform.CompareTag("Enemy"))
+        {
+            transform.position = spawnPoint.position;
+        }
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (Input.GetKeyDown(KeyCode.R) && (collision.transform.name[0].ToString() == "F"))
+        {
+            ObjectPool.Instance.SetObject("F_Orange", collision.gameObject);
+            fruitCount++;
         }
     }
 }

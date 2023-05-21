@@ -61,8 +61,7 @@ public class ObjectPool : MonoBehaviour
             tempObj.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
         }
         tempObj.SetActive(true);
-
-        _poolDictionary[tag].Enqueue(tempObj);
+        
         return tempObj;
     }
 

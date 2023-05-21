@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Map
+  - Enemy
+  - Fruit
+  - DeadZone
   layers:
   - Default
   - TransparentFX
