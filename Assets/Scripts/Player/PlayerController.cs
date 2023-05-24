@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
     public Transform firePoint;
     
     //Private stuff used for control
+    private bool _jumpPressed;
     private float _movementInputDirection;
     private Vector2 _mousePos;
     private Ray _fireRay;
@@ -71,7 +72,17 @@ public class PlayerController : MonoBehaviour
 
     private void CheckMovementInput()
     {
-        _movementInputDirection = Input.GetAxisRaw("Horizontal");
+        //Check movement input
+        if (Input.GetAxis("Horizontal") != 0)
+        {
+            _movementInputDirection = Input.GetAxisRaw("Horizontal");
+        }
+
+        //Check jump input
+        if (Input.GetButtonDown("Jump"))
+        {
+            _jumpPressed = true;
+        }
     }
     
     private void ApplyMovementInput()
@@ -95,10 +106,13 @@ public class PlayerController : MonoBehaviour
     private void Jump()
     {
         //Jump if press space
-        if (Input.GetButtonDown("Jump") && isGround)
+        if (_jumpPressed && isGround)
         {
             _rb.velocity = new Vector2(_rb.velocity.x, jumpForce);
         }
+
+        //Reset _jumpPressed whether the player actually jumps
+        _jumpPressed = false;
     }
 
     private void Fire()
@@ -135,7 +149,6 @@ public class PlayerController : MonoBehaviour
         if (col.transform.CompareTag("DeadZone") || col.transform.CompareTag("Enemy"))
         {
             transform.position = spawnPoint.position;
-            isGround = true;
         }
     }
 

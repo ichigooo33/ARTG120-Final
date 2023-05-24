@@ -13,7 +13,7 @@ public class GroundCheck : MonoBehaviour
         _playerController = transform.parent.GetComponent<PlayerController>();
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerStay2D(Collider2D other)
     {
         //Update isGround if collide with "Map" object
         if (other.CompareTag("Map"))
