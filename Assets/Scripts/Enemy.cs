@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour
     public float moveSpeed;
 
     private Rigidbody2D _rb2D;
+    private RaycastHit2D _hit;
 
     private void Start()
     {
@@ -19,9 +20,9 @@ public class Enemy : MonoBehaviour
 
     private void FixedUpdate()
     {
-        RaycastHit2D hit = Physics2D.Raycast(groundDetectionPoint.position, Vector2.down, 3f);
+        _hit = Physics2D.Raycast(groundDetectionPoint.position, Vector2.down, 3f);
 
-        if (hit.collider == null)
+        if (_hit.collider == null)
         {
             //Debug.Log("Nothing at front!");
             transform.Rotate(Vector3.up, 180);

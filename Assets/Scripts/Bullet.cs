@@ -24,6 +24,7 @@ public class Bullet : MonoBehaviour
         if (col.transform.CompareTag("Enemy"))
         {
             Destroy(col.gameObject);
+            ObjectPool.Instance.SetObject(name, gameObject);
         }
         
         if (col.transform.CompareTag("Map"))

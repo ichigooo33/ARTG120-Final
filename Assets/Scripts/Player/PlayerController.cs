@@ -1,11 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Numerics;
-using Cinemachine;
-using Unity.Collections;
 using Unity.Mathematics;
-using Unity.VisualScripting;
 using UnityEngine;
 using Quaternion = UnityEngine.Quaternion;
 using Vector2 = UnityEngine.Vector2;
@@ -17,7 +10,6 @@ public class PlayerController : MonoBehaviour
     [Header("Player Variables")]
     public float moveSpeed;
     public float jumpForce;
-    public float playerWidth;
     public int fruitCount;
     public Transform spawnPoint;
     
@@ -28,19 +20,19 @@ public class PlayerController : MonoBehaviour
     [Header("Bullet/Platform Variables")]
     public float bulletForce;
     public float fireCollDownTime = 1;
-    private float _fireCounter = 0;
     public float platformForce;
+    private float _fireCounter = 0;
 
-    private Vector2 _screenCenter = new Vector2(Screen.width / 2, Screen.height / 2);
+    private Vector2 _screenCenter = new (Screen.width / 2, Screen.height / 2);
 
     //Define Components
     private Rigidbody2D _rb;
-    private SpriteRenderer _sr;
 
     //Get Fire Point
     public Transform firePoint;
     
     //Private stuff used for control
+    private float _movementInputDirection;
     private Vector2 _mousePos;
     private Ray _fireRay;
     
@@ -48,11 +40,13 @@ public class PlayerController : MonoBehaviour
     {
         //Get player's own components
         _rb = GetComponent<Rigidbody2D>();
-        _sr = GetComponent<SpriteRenderer>();
     }
 
     private void Update()
     {
+        //Check player's movement input
+        CheckMovementInput();
+        
         //Update aim ray
         _mousePos = new Vector2(Input.mousePosition.x - _screenCenter.x, Input.mousePosition.y - _screenCenter.y);
         _fireRay = new Ray(firePoint.position, _mousePos);
@@ -68,45 +62,42 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         //Add time to counter
-        _fireCounter += Time.deltaTime;
+        _fireCounter += Time.fixedDeltaTime;
         
         //Player control
-        Move();
+        ApplyMovementInput();
         Jump();
     }
 
-    private void Move()
+    private void CheckMovementInput()
     {
-        //Move right or left based on keyboard input
-        if (Input.GetAxis("Horizontal") != 0)
+        _movementInputDirection = Input.GetAxisRaw("Horizontal");
+    }
+    
+    private void ApplyMovementInput()
+    {
+        //Rotate the player if moving toward different direction
+        if (_movementInputDirection < 0 && facingRight)
         {
-            float horizontalInput = Input.GetAxis("Horizontal");
-            
-            //Rotate the player if moving toward different direction
-            if (horizontalInput < 0 && facingRight)
-            {
-                //Turn left
-                transform.Rotate(Vector3.up, 180);
-                facingRight = false;
-            }
-            else if (horizontalInput > 0 && !facingRight)
-            {
-                //Turn right
-                transform.Rotate(Vector3.up, 180);
-                facingRight = true;
-            }
-
-            float tempVelocityY = _rb.velocity.y;
-            _rb.velocity = new Vector2(Input.GetAxis("Horizontal") * moveSpeed, tempVelocityY);
+            //Turn left
+            transform.Rotate(Vector3.up, 180);
+            facingRight = false;
         }
+        else if (_movementInputDirection > 0 && !facingRight)
+        {
+            //Turn right
+            transform.Rotate(Vector3.up, 180);
+            facingRight = true;
+        }
+        _rb.velocity = new Vector2(_movementInputDirection * moveSpeed, _rb.velocity.y);
     }
 
     private void Jump()
     {
         //Jump if press space
-        if (Input.GetKeyDown(KeyCode.Space) && isGround)
+        if (Input.GetButtonDown("Jump") && isGround)
         {
-            _rb.AddForce(Vector2.up * jumpForce);
+            _rb.velocity = new Vector2(_rb.velocity.x, jumpForce);
         }
     }
 
@@ -144,6 +135,7 @@ public class PlayerController : MonoBehaviour
         if (col.transform.CompareTag("DeadZone") || col.transform.CompareTag("Enemy"))
         {
             transform.position = spawnPoint.position;
+            isGround = true;
         }
     }
 
