@@ -699,11 +699,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145762023128809122, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 142.98999
+      value: 140.48
       objectReference: {fileID: 0}
     - target: {fileID: 145762023128809122, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -14
+      value: -15.07
       objectReference: {fileID: 0}
     - target: {fileID: 145762023128809122, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_LocalPosition.z
@@ -14867,7 +14867,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4359061092465270847, guid: 3e97caa69c219554b8de59acfd4bba59, type: 3}
       propertyPath: jumpForce
-      value: 20
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 4359061092465270847, guid: 3e97caa69c219554b8de59acfd4bba59, type: 3}
       propertyPath: spawnPoint
@@ -14876,6 +14876,14 @@ PrefabInstance:
     - target: {fileID: 4359061092465270847, guid: 3e97caa69c219554b8de59acfd4bba59, type: 3}
       propertyPath: fireCollDownTime
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4359061092465270847, guid: 3e97caa69c219554b8de59acfd4bba59, type: 3}
+      propertyPath: airDragMultiplier
+      value: 0.95
+      objectReference: {fileID: 0}
+    - target: {fileID: 4359061092465270847, guid: 3e97caa69c219554b8de59acfd4bba59, type: 3}
+      propertyPath: movementForceInAir
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e97caa69c219554b8de59acfd4bba59, type: 3}

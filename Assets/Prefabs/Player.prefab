@@ -89,7 +89,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.082799196, y: -0.49507004}
+  m_Offset: {x: 0.07183719, y: -0.48821878}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -100,7 +100,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5446048, y: 0.08575904}
+  m_Size: {x: 0.52268076, y: 0.050132275}
   m_EdgeRadius: 0
 --- !u!1 &4359061092465270786
 GameObject:
@@ -250,10 +250,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6976b2864291c244908ce9d6a611af7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnPoint: {fileID: 0}
   moveSpeed: 10
   jumpForce: 600
   fruitCount: 0
-  spawnPoint: {fileID: 0}
+  movementForceInAir: 0
+  airDragMultiplier: 0.85
   isGround: 0
   facingRight: 1
   bulletForce: 80

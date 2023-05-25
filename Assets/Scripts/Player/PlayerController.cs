@@ -6,13 +6,18 @@ using Vector3 = UnityEngine.Vector3;
 
 public class PlayerController : MonoBehaviour
 {
+    //Define transforms
+    public Transform spawnPoint;
+    
     //Define Variables and Settings
     [Header("Player Variables")]
     public float moveSpeed;
     public float jumpForce;
     public int fruitCount;
-    public Transform spawnPoint;
-    
+    public float movementForceInAir;
+    [Range(0, 1)]
+    public float airDragMultiplier = 0.85f;
+
     [Header("Player Status")]
     public bool isGround = false;
     public bool facingRight = true;
@@ -21,7 +26,6 @@ public class PlayerController : MonoBehaviour
     public float bulletForce;
     public float fireCollDownTime = 1;
     public float platformForce;
-    private float _fireCounter = 0;
 
     private Vector2 _screenCenter = new (Screen.width / 2, Screen.height / 2);
 
@@ -34,8 +38,11 @@ public class PlayerController : MonoBehaviour
     //Private stuff used for control
     private bool _jumpPressed;
     private float _movementInputDirection;
+    private Vector2 _airForce;
+    
     private Vector2 _mousePos;
     private Ray _fireRay;
+    private float _fireCounter = 0;
     
     void Start()
     {
@@ -102,20 +109,37 @@ public class PlayerController : MonoBehaviour
         }
         
         //Apply player's horizontal movement
-        _rb.velocity = new Vector2(_movementInputDirection * moveSpeed, _rb.velocity.y);
+        if (isGround)
+        {
+            _rb.velocity = new Vector2(_movementInputDirection * moveSpeed, _rb.velocity.y);
+        }
+        else if (_movementInputDirection != 0)
+        {
+            _airForce = new Vector2(movementForceInAir * _movementInputDirection, 0);
+            _rb.AddForce(_airForce);
+
+            if (Mathf.Abs(_rb.velocity.x) > moveSpeed)
+            {
+                _rb.velocity = new Vector2(_movementInputDirection * moveSpeed, _rb.velocity.y);
+            }
+        }
+        else if (_movementInputDirection == 0)
+        {
+            _rb.velocity = new Vector2(_rb.velocity.x * airDragMultiplier, _rb.velocity.y);
+        }
     }
 
     private void Jump()
-{
-//Jump if press space
-if (_jumpPressed && isGround)
-{
-    _rb.velocity = new Vector2(_rb.velocity.x, jumpForce);
-}
+    {
+        //Jump if press space
+        if (_jumpPressed && isGround)
+        {
+            _rb.velocity = new Vector2(_rb.velocity.x, jumpForce);
+        }
 
-//Reset _jumpPressed whether the player actually jumps
-_jumpPressed = false;
-}
+        //Reset _jumpPressed whether the player actually jumps
+        _jumpPressed = false;
+    }
 
     private void Fire()
     {
