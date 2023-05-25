@@ -84,7 +84,7 @@ public class PlayerController : MonoBehaviour
             _jumpPressed = true;
         }
     }
-    
+
     private void ApplyMovementInput()
     {
         //Rotate the player if moving toward different direction
@@ -100,20 +100,22 @@ public class PlayerController : MonoBehaviour
             transform.Rotate(Vector3.up, 180);
             facingRight = true;
         }
+        
+        //Apply player's horizontal movement
         _rb.velocity = new Vector2(_movementInputDirection * moveSpeed, _rb.velocity.y);
     }
 
     private void Jump()
-    {
-        //Jump if press space
-        if (_jumpPressed && isGround)
-        {
-            _rb.velocity = new Vector2(_rb.velocity.x, jumpForce);
-        }
+{
+//Jump if press space
+if (_jumpPressed && isGround)
+{
+    _rb.velocity = new Vector2(_rb.velocity.x, jumpForce);
+}
 
-        //Reset _jumpPressed whether the player actually jumps
-        _jumpPressed = false;
-    }
+//Reset _jumpPressed whether the player actually jumps
+_jumpPressed = false;
+}
 
     private void Fire()
     {
