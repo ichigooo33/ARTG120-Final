@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour
     public float movementForceInAir;
     [Range(0, 1)]
     public float airDragMultiplier = 0.85f;
+    [Range(0, 1)]
+    public float smallJumpMultiplier = 0.5f;
 
     [Header("Player Status")]
     public bool isGround = false;
@@ -36,7 +38,6 @@ public class PlayerController : MonoBehaviour
     public Transform firePoint;
     
     //Private stuff used for control
-    private bool _jumpPressed;
     private float _movementInputDirection;
     private Vector2 _airForce;
     
@@ -74,7 +75,6 @@ public class PlayerController : MonoBehaviour
         
         //Player control
         ApplyMovementInput();
-        Jump();
     }
 
     private void CheckMovementInput()
@@ -86,10 +86,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //Check jump input
-        if (Input.GetButtonDown("Jump"))
-        {
-            _jumpPressed = true;
-        }
+        Jump();
     }
 
     private void ApplyMovementInput()
@@ -118,6 +115,7 @@ public class PlayerController : MonoBehaviour
             _airForce = new Vector2(movementForceInAir * _movementInputDirection, 0);
             _rb.AddForce(_airForce);
 
+            //Lerp _rb.velocity if the velocity exceeds moveSpeed after adding force 
             if (Mathf.Abs(_rb.velocity.x) > moveSpeed)
             {
                 _rb.velocity = new Vector2(_movementInputDirection * moveSpeed, _rb.velocity.y);
@@ -131,14 +129,10 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
-        //Jump if press space
-        if (_jumpPressed && isGround)
+        if (Input.GetButtonDown("Jump") && isGround)
         {
             _rb.velocity = new Vector2(_rb.velocity.x, jumpForce);
         }
-
-        //Reset _jumpPressed whether the player actually jumps
-        _jumpPressed = false;
     }
 
     private void Fire()
