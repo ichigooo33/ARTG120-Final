@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
 {
     //Define transforms
     public Transform spawnPoint;
+    public Transform firePoint;
+    public Transform groundCheckRayPoint;
     
     //Define Variables and Settings
     [Header("Player Variables")]
@@ -33,11 +35,10 @@ public class PlayerController : MonoBehaviour
 
     //Define Components
     private Rigidbody2D _rb;
-
-    //Get Fire Point
-    public Transform firePoint;
     
     //Private stuff used for control
+    private LayerMask _onlyGroundLayer;
+    
     private float _movementInputDirection;
     private Vector2 _airForce;
     
@@ -49,6 +50,8 @@ public class PlayerController : MonoBehaviour
     {
         //Get player's own components
         _rb = GetComponent<Rigidbody2D>();
+        
+        _onlyGroundLayer = 1 << 3;
     }
 
     private void Update()
@@ -73,8 +76,32 @@ public class PlayerController : MonoBehaviour
         //Add time to counter
         _fireCounter += Time.fixedDeltaTime;
         
+        //Check ground and update isGround
+        GroundCheck();
+
         //Player control
         ApplyMovementInput();
+    }
+
+    private void GroundCheck()
+    {
+        RaycastHit2D groundHit = Physics2D.Raycast(groundCheckRayPoint.position, Vector2.down, 0.5f, _onlyGroundLayer);
+        if (!groundHit)
+        {
+            Debug.DrawRay(groundCheckRayPoint.position, Vector3.down * 0.5f, Color.red);
+            if (isGround)
+            {
+                isGround = false;
+            }
+        }
+        else
+        {
+            Debug.DrawRay(groundCheckRayPoint.position, Vector3.down * 0.5f, Color.green);
+            if (!isGround)
+            {
+                isGround = true;
+            }
+        }
     }
 
     private void CheckMovementInput()

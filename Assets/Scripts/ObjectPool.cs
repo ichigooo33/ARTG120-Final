@@ -39,6 +39,7 @@ public class ObjectPool : MonoBehaviour
         }
     }
 
+    // ReSharper disable Unity.PerformanceAnalysis
     public GameObject GetObject(string tag, Vector3 positon, Quaternion rotation)
     {
         //If try to get an object that doesn't exist in ObjectPool
@@ -51,7 +52,7 @@ public class ObjectPool : MonoBehaviour
         GameObject tempObj = _poolDictionary[tag].Dequeue();
         tempObj.transform.position = positon;
         tempObj.transform.rotation = rotation;
-
+        
         if (tempObj.GetComponent<Rigidbody2D>().bodyType == RigidbodyType2D.Dynamic)
         {
             tempObj.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
@@ -60,6 +61,7 @@ public class ObjectPool : MonoBehaviour
         {
             tempObj.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
         }
+        
         tempObj.SetActive(true);
         
         return tempObj;

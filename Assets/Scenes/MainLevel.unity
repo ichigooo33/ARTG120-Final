@@ -128,15 +128,19 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 415245030}
+    m_TransformParent: {fileID: 1370034607}
     m_Modifications:
     - target: {fileID: 145762023128809117, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_Name
       value: GreenCarRat (L2_ILM) (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 145762023128809117, guid: ba491c1107dc1fd498a338397408b058, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 145762023128809122, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_RootOrder
-      value: 19
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 145762023128809122, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_LocalPosition.x
@@ -185,16 +189,78 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 145762023128809122, guid: ba491c1107dc1fd498a338397408b058, type: 3}
   m_PrefabInstance: {fileID: 43620161}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &117667235
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 117667236}
+  - component: {fileID: 117667237}
+  m_Layer: 0
+  m_Name: DeadZone (3)
+  m_TagString: DeadZone
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &117667236
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 117667235}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 21, y: -17, z: 0}
+  m_LocalScale: {x: 300, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2028263678}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &117667237
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 117667235}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.28, y: -15.21}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1001 &193242906
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 415245030}
+    m_TransformParent: {fileID: 1256214269}
     m_Modifications:
     - target: {fileID: 145762023128809117, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_Name
       value: GreenCarRat (L1_FEM) (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145762023128809117, guid: ba491c1107dc1fd498a338397408b058, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 145762023128809122, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_RootOrder
@@ -252,15 +318,19 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 415245030}
+    m_TransformParent: {fileID: 1370034607}
     m_Modifications:
     - target: {fileID: 145762023128809117, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_Name
       value: GreenCarRat (L2_ILM) (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 145762023128809117, guid: ba491c1107dc1fd498a338397408b058, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 145762023128809122, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_RootOrder
-      value: 17
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 145762023128809122, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_LocalPosition.x
@@ -376,15 +446,19 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 415245030}
+    m_TransformParent: {fileID: 1370034607}
     m_Modifications:
     - target: {fileID: 145762023128809117, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_Name
       value: GreenCarRat (L2_ILM) (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 145762023128809117, guid: ba491c1107dc1fd498a338397408b058, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 145762023128809122, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_RootOrder
-      value: 15
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 145762023128809122, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_LocalPosition.x
@@ -466,33 +540,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1742059850}
-  - {fileID: 891059029}
-  - {fileID: 495091725}
-  - {fileID: 856710404}
-  - {fileID: 1214914570}
-  - {fileID: 1132681190}
-  - {fileID: 193242907}
-  - {fileID: 682259811}
-  - {fileID: 1539966226}
-  - {fileID: 494581426}
-  - {fileID: 1612210872}
-  - {fileID: 1892710499}
-  - {fileID: 1719930442}
-  - {fileID: 1403373395}
-  - {fileID: 1392002068}
-  - {fileID: 331391044}
-  - {fileID: 1571620649}
-  - {fileID: 296885724}
-  - {fileID: 1690613672}
-  - {fileID: 43620162}
-  - {fileID: 823110559}
-  - {fileID: 485305794}
-  - {fileID: 1969388351}
-  - {fileID: 1671043042}
-  - {fileID: 1635273999}
-  - {fileID: 399515890}
-  - {fileID: 1399959215}
+  - {fileID: 1256214269}
+  - {fileID: 1370034607}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -501,15 +550,19 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 415245030}
+    m_TransformParent: {fileID: 1370034607}
     m_Modifications:
     - target: {fileID: 145762023128809117, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_Name
       value: GreenCarRat (L2_Temp) (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 145762023128809117, guid: ba491c1107dc1fd498a338397408b058, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 145762023128809122, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_RootOrder
-      value: 21
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 145762023128809122, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_LocalPosition.x
@@ -563,23 +616,27 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 415245030}
+    m_TransformParent: {fileID: 1370034607}
     m_Modifications:
     - target: {fileID: 145762023128809117, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_Name
       value: GreenCarRat (L2_ILM)
       objectReference: {fileID: 0}
+    - target: {fileID: 145762023128809117, guid: ba491c1107dc1fd498a338397408b058, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 145762023128809122, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 145762023128809122, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 202.15
+      value: 204.5
       objectReference: {fileID: 0}
     - target: {fileID: 145762023128809122, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -15.080001
+      value: -14.8
       objectReference: {fileID: 0}
     - target: {fileID: 145762023128809122, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_LocalPosition.z
@@ -625,11 +682,15 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 415245030}
+    m_TransformParent: {fileID: 1256214269}
     m_Modifications:
     - target: {fileID: 145762023128809117, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_Name
       value: GreenCarRat (L1_FEM) (0)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145762023128809117, guid: ba491c1107dc1fd498a338397408b058, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 145762023128809122, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_RootOrder
@@ -687,15 +748,19 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 415245030}
+    m_TransformParent: {fileID: 1370034607}
     m_Modifications:
     - target: {fileID: 145762023128809117, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_Name
       value: GreenCarRat (L2_Temp) (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 145762023128809117, guid: ba491c1107dc1fd498a338397408b058, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 145762023128809122, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_RootOrder
-      value: 26
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 145762023128809122, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_LocalPosition.x
@@ -851,7 +916,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.96, y: -0.81, z: -9}
+  m_LocalPosition: {x: -5.96, y: -1.1, z: -9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -906,7 +971,7 @@ GameObject:
   - component: {fileID: 563747261}
   - component: {fileID: 563747263}
   - component: {fileID: 563747262}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Ground
   m_TagString: Map
   m_Icon: {fileID: 0}
@@ -12831,7 +12896,7 @@ MonoBehaviour:
   m_Intensity: 0.8
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
-  m_ApplyToSortingLayers: 0000000033182b280d537915efacdb2805ff1122
+  m_ApplyToSortingLayers: 05ff1122efacdb280d537915000000008753c4dc33182b28
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -12942,11 +13007,15 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 415245030}
+    m_TransformParent: {fileID: 1256214269}
     m_Modifications:
     - target: {fileID: 145762023128809117, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_Name
       value: GreenCarRat (L1_FEM) (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145762023128809117, guid: ba491c1107dc1fd498a338397408b058, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 145762023128809122, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_RootOrder
@@ -13088,15 +13157,19 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 415245030}
+    m_TransformParent: {fileID: 1370034607}
     m_Modifications:
     - target: {fileID: 145762023128809117, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_Name
       value: GreenCarRat (L2_Temp)
       objectReference: {fileID: 0}
+    - target: {fileID: 145762023128809117, guid: ba491c1107dc1fd498a338397408b058, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 145762023128809122, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_RootOrder
-      value: 24
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 145762023128809122, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_LocalPosition.x
@@ -13145,15 +13218,19 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 415245030}
+    m_TransformParent: {fileID: 1370034607}
     m_Modifications:
     - target: {fileID: 145762023128809117, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_Name
       value: GreenCarRat (L2_Temp) (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 145762023128809117, guid: ba491c1107dc1fd498a338397408b058, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 145762023128809122, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_RootOrder
-      value: 20
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 145762023128809122, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_LocalPosition.x
@@ -13318,11 +13395,15 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 415245030}
+    m_TransformParent: {fileID: 1256214269}
     m_Modifications:
     - target: {fileID: 145762023128809117, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_Name
       value: GreenCarRat (L1_FEM) (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145762023128809117, guid: ba491c1107dc1fd498a338397408b058, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 145762023128809122, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_RootOrder
@@ -13334,7 +13415,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145762023128809122, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 9.999999
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 145762023128809122, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_LocalPosition.z
@@ -13380,11 +13461,15 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 415245030}
+    m_TransformParent: {fileID: 1256214269}
     m_Modifications:
     - target: {fileID: 145762023128809117, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_Name
       value: GreenCarRat (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145762023128809117, guid: ba491c1107dc1fd498a338397408b058, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 145762023128809122, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_RootOrder
@@ -13608,7 +13693,7 @@ MonoBehaviour:
   m_Intensity: 1.5
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
-  m_ApplyToSortingLayers: 05ff11220d537915
+  m_ApplyToSortingLayers: 05ff1122
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -13781,11 +13866,15 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 415245030}
+    m_TransformParent: {fileID: 1256214269}
     m_Modifications:
     - target: {fileID: 145762023128809117, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_Name
       value: GreenCarRat (L1_FEM) (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145762023128809117, guid: ba491c1107dc1fd498a338397408b058, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 145762023128809122, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_RootOrder
@@ -13892,11 +13981,15 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 415245030}
+    m_TransformParent: {fileID: 1256214269}
     m_Modifications:
     - target: {fileID: 145762023128809117, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_Name
       value: GreenCarRat (L1_FEM) (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145762023128809117, guid: ba491c1107dc1fd498a338397408b058, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 145762023128809122, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_RootOrder
@@ -13983,6 +14076,46 @@ Transform:
   - {fileID: 743738400}
   m_Father: {fileID: 0}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1256214268
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1256214269}
+  m_Layer: 0
+  m_Name: --- Level 1 Enemy ---
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1256214269
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1256214268}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1742059850}
+  - {fileID: 891059029}
+  - {fileID: 495091725}
+  - {fileID: 856710404}
+  - {fileID: 1214914570}
+  - {fileID: 1132681190}
+  - {fileID: 193242907}
+  - {fileID: 682259811}
+  - {fileID: 1539966226}
+  m_Father: {fileID: 415245030}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1272623697
 GameObject:
@@ -14162,6 +14295,55 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3426153591954240472, guid: 54368a471beb44a4790c111414db13a2, type: 3}
   m_PrefabInstance: {fileID: 1318788770}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1370034606
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1370034607}
+  m_Layer: 0
+  m_Name: --- Level 2 Enemy ---
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1370034607
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1370034606}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 494581426}
+  - {fileID: 1612210872}
+  - {fileID: 1892710499}
+  - {fileID: 1719930442}
+  - {fileID: 1403373395}
+  - {fileID: 1392002068}
+  - {fileID: 331391044}
+  - {fileID: 1571620649}
+  - {fileID: 296885724}
+  - {fileID: 1690613672}
+  - {fileID: 43620162}
+  - {fileID: 823110559}
+  - {fileID: 485305794}
+  - {fileID: 1969388351}
+  - {fileID: 1671043042}
+  - {fileID: 1635273999}
+  - {fileID: 399515890}
+  - {fileID: 1399959215}
+  m_Father: {fileID: 415245030}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1370452072
 GameObject:
   m_ObjectHideFlags: 0
@@ -14204,6 +14386,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1390806952}
   - component: {fileID: 1390806953}
+  - component: {fileID: 1390806954}
   m_Layer: 0
   m_Name: --- SceneScripts ---
   m_TagString: Untagged
@@ -14245,20 +14428,43 @@ MonoBehaviour:
   - tag: F_Orange
     prefab: {fileID: 7285974219825969263, guid: 19ff3410f05155a4ca3ed493c7e66a13, type: 3}
     size: 20
+  - tag: Meteorite
+    prefab: {fileID: 4738669958621107274, guid: a259d3f52e43cc54d86f0f198beb4fc1, type: 3}
+    size: 5
+--- !u!114 &1390806954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1390806950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 455aeca9b91091749991ece5d0217ae0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meteorite: {fileID: 4738669958621107274, guid: a259d3f52e43cc54d86f0f198beb4fc1, type: 3}
+  generateTime: 3
+  generateRangeMin: -20
+  generateRangeMax: 240
 --- !u!1001 &1392002067
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 415245030}
+    m_TransformParent: {fileID: 1370034607}
     m_Modifications:
     - target: {fileID: 145762023128809117, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_Name
       value: GreenCarRat (L2_ILM) (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 145762023128809117, guid: ba491c1107dc1fd498a338397408b058, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 145762023128809122, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_RootOrder
-      value: 14
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 145762023128809122, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_LocalPosition.x
@@ -14317,15 +14523,19 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 415245030}
+    m_TransformParent: {fileID: 1370034607}
     m_Modifications:
     - target: {fileID: 145762023128809117, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_Name
       value: GreenCarRat (L2_Temp) (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 145762023128809117, guid: ba491c1107dc1fd498a338397408b058, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 145762023128809122, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 145762023128809122, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_LocalPosition.x
@@ -14441,11 +14651,15 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 415245030}
+    m_TransformParent: {fileID: 1256214269}
     m_Modifications:
     - target: {fileID: 145762023128809117, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_Name
       value: GreenCarRat (L1_FEM) (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145762023128809117, guid: ba491c1107dc1fd498a338397408b058, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 145762023128809122, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_RootOrder
@@ -14453,11 +14667,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145762023128809122, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 117.67
+      value: 117.4
       objectReference: {fileID: 0}
     - target: {fileID: 145762023128809122, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 19.58
+      value: 19.9
       objectReference: {fileID: 0}
     - target: {fileID: 145762023128809122, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_LocalPosition.z
@@ -14503,15 +14717,19 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 415245030}
+    m_TransformParent: {fileID: 1370034607}
     m_Modifications:
     - target: {fileID: 145762023128809117, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_Name
       value: GreenCarRat (L2_ILM) (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 145762023128809117, guid: ba491c1107dc1fd498a338397408b058, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 145762023128809122, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_RootOrder
-      value: 16
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 145762023128809122, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_LocalPosition.x
@@ -14627,15 +14845,19 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 415245030}
+    m_TransformParent: {fileID: 1370034607}
     m_Modifications:
     - target: {fileID: 145762023128809117, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_Name
       value: GreenCarRat (L2_ILM) (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 145762023128809117, guid: ba491c1107dc1fd498a338397408b058, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 145762023128809122, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 145762023128809122, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_LocalPosition.x
@@ -14730,15 +14952,19 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 415245030}
+    m_TransformParent: {fileID: 1370034607}
     m_Modifications:
     - target: {fileID: 145762023128809117, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_Name
       value: GreenCarRat (L2_ILM) (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 145762023128809117, guid: ba491c1107dc1fd498a338397408b058, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 145762023128809122, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_RootOrder
-      value: 23
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 145762023128809122, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_LocalPosition.x
@@ -14854,15 +15080,19 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 415245030}
+    m_TransformParent: {fileID: 1370034607}
     m_Modifications:
     - target: {fileID: 145762023128809117, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_Name
       value: GreenCarRat (L2_ILM) (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 145762023128809117, guid: ba491c1107dc1fd498a338397408b058, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 145762023128809122, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_RootOrder
-      value: 18
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 145762023128809122, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_LocalPosition.x
@@ -14916,15 +15146,19 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 415245030}
+    m_TransformParent: {fileID: 1370034607}
     m_Modifications:
     - target: {fileID: 145762023128809117, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_Name
       value: GreenCarRat (L2_Temp)
       objectReference: {fileID: 0}
+    - target: {fileID: 145762023128809117, guid: ba491c1107dc1fd498a338397408b058, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 145762023128809122, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 145762023128809122, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_LocalPosition.x
@@ -15009,7 +15243,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 415245030}
+    m_TransformParent: {fileID: 1256214269}
     m_Modifications:
     - target: {fileID: 145762023128809117, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_Name
@@ -15116,15 +15350,19 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 415245030}
+    m_TransformParent: {fileID: 1370034607}
     m_Modifications:
     - target: {fileID: 145762023128809117, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_Name
       value: GreenCarRat (L2_ILM) (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 145762023128809117, guid: ba491c1107dc1fd498a338397408b058, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 145762023128809122, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 145762023128809122, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_LocalPosition.x
@@ -15178,15 +15416,19 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 415245030}
+    m_TransformParent: {fileID: 1370034607}
     m_Modifications:
     - target: {fileID: 145762023128809117, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_Name
       value: GreenCarRat (L2_ILM) (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 145762023128809117, guid: ba491c1107dc1fd498a338397408b058, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 145762023128809122, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_RootOrder
-      value: 22
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 145762023128809122, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_LocalPosition.x
@@ -15271,6 +15513,7 @@ Transform:
   - {fileID: 1272623699}
   - {fileID: 1313318900}
   - {fileID: 619117021}
+  - {fileID: 117667236}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -15279,15 +15522,19 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 415245030}
+    m_TransformParent: {fileID: 1370034607}
     m_Modifications:
     - target: {fileID: 145762023128809117, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_Name
       value: GreenCarRat (L2_Temp) (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 145762023128809117, guid: ba491c1107dc1fd498a338397408b058, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 145762023128809122, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_RootOrder
-      value: 25
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 145762023128809122, guid: ba491c1107dc1fd498a338397408b058, type: 3}
       propertyPath: m_LocalPosition.x
@@ -15356,7 +15603,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2142765979}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.96, y: -0.81, z: -9}
+  m_LocalPosition: {x: -5.96, y: -1.1, z: -9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -15427,7 +15674,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4359061092465270845, guid: 3e97caa69c219554b8de59acfd4bba59, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.81
+      value: -1.1
       objectReference: {fileID: 0}
     - target: {fileID: 4359061092465270845, guid: 3e97caa69c219554b8de59acfd4bba59, type: 3}
       propertyPath: m_LocalPosition.z
