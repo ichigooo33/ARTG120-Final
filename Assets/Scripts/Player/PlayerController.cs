@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour
     private Ray _fireRay;
     private float _fireCounter = 0;
     
-    void Start()
+    private void Start()
     {
         //Get player's own components
         _rb = GetComponent<Rigidbody2D>();
@@ -83,6 +83,10 @@ public class PlayerController : MonoBehaviour
         if (Input.GetAxis("Horizontal") != 0)
         {
             _movementInputDirection = Input.GetAxisRaw("Horizontal");
+        }
+        else
+        {
+            _movementInputDirection = 0;
         }
 
         //Check jump input
@@ -123,7 +127,9 @@ public class PlayerController : MonoBehaviour
         }
         else if (_movementInputDirection == 0)
         {
-            _rb.velocity = new Vector2(_rb.velocity.x * airDragMultiplier, _rb.velocity.y);
+            var velocity = _rb.velocity;
+            velocity = new Vector2(velocity.x * airDragMultiplier, velocity.y);
+            _rb.velocity = velocity;
         }
     }
 
@@ -135,6 +141,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // ReSharper disable Unity.PerformanceAnalysis
     private void Fire()
     {
         if (Input.GetMouseButton(0) && _fireCounter > fireCollDownTime)
@@ -148,6 +155,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // ReSharper disable Unity.PerformanceAnalysis
     private void BuildPlatform()
     {
         if (Input.GetKeyDown(KeyCode.F) && fruitCount > 0)
