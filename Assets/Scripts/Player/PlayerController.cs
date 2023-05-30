@@ -27,10 +27,12 @@ public class PlayerController : MonoBehaviour
     public bool isGround = false;
     public bool facingRight = true;
     public int facingIndex = 1;
-    
-    [Header("Bullet/Platform Variables")]
+    public string currentBullet;
+
+    [Header("Bullet/Platform Variables")] 
+    public float fireRayDetectionMaxDistance;
     public float bulletForce;
-    public float fireCollDownTime = 1;
+    public float fireCoolDownTime = 1;
     public float platformForce;
 
     private Vector2 _screenCenter = new (Screen.width / 2, Screen.height / 2);
@@ -40,6 +42,7 @@ public class PlayerController : MonoBehaviour
     
     //Private stuff used for control
     private LayerMask _onlyGroundLayer;
+    private LayerMask _ignorePlayerLayer;
     
     private float _movementInputDirection;
     private Vector2 _airForce;
@@ -54,26 +57,22 @@ public class PlayerController : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
         
         _onlyGroundLayer = 1 << 3;
+
+        currentBullet = "GrassBullet";
     }
 
     private void Update()
     {
         //Check player's movement input
         CheckMovementInput();
-        
-        //Update aim ray
-        _mousePos = new Vector2(Input.mousePosition.x - _screenCenter.x, Input.mousePosition.y - _screenCenter.y).normalized;
-        _fireRay = new Ray(firePoint.position, _mousePos);
-        Debug.DrawRay(_fireRay.origin, _fireRay.direction * 20, Color.red);
+
+        MouseInputUpdate();
 
         //Update player's light direction
         ApplyLightDirection();
         
         //Player fire
         Fire();
-        
-        //Player builds platform
-        BuildPlatform();
     }
 
     private void FixedUpdate()
@@ -176,15 +175,31 @@ public class PlayerController : MonoBehaviour
     }
 
     // ReSharper disable Unity.PerformanceAnalysis
+    private void MouseInputUpdate()
+    {
+        //Update aim ray
+        _mousePos = new Vector2(Input.mousePosition.x - _screenCenter.x, Input.mousePosition.y - _screenCenter.y).normalized;
+        _fireRay = new Ray(firePoint.position, _mousePos);
+        Debug.DrawRay(_fireRay.origin, _fireRay.direction * fireRayDetectionMaxDistance, Color.red);
+
+        RaycastHit2D fireRayHit = Physics2D.Raycast(_fireRay.origin, _fireRay.direction, fireRayDetectionMaxDistance, _onlyGroundLayer);
+
+        if(Input.GetMouseButtonDown(1) && fireRayHit && fireRayHit.transform.CompareTag("Platform"))
+        {
+            ObjectPool.Instance.SetObject(fireRayHit.transform.name, fireRayHit.transform.gameObject);
+        }
+    }
+
+    // ReSharper disable Unity.PerformanceAnalysis
     private void Fire()
     {
-        if (Input.GetMouseButton(0) && _fireCounter > fireCollDownTime)
+        if (Input.GetMouseButton(0) && _fireCounter > fireCoolDownTime)
         {
             //Reset the counter
             _fireCounter = 0;
             
             //Get bullet from the ObjectPool
-            GameObject obj = ObjectPool.Instance.GetObject("Bullet", firePoint.position, Quaternion.identity);
+            GameObject obj = ObjectPool.Instance.GetObject(currentBullet, firePoint.position, Quaternion.identity);
             obj.GetComponent<Rigidbody2D>().AddForce(_fireRay.direction * bulletForce);
         }
     }
@@ -192,12 +207,12 @@ public class PlayerController : MonoBehaviour
     // ReSharper disable Unity.PerformanceAnalysis
     private void BuildPlatform()
     {
-        if (Input.GetKeyDown(KeyCode.F) && fruitCount > 0)
+        /*if (Input.GetKeyDown(KeyCode.F) && fruitCount > 0)
         {
             fruitCount--;
             GameObject obj = ObjectPool.Instance.GetObject("F_Orange", firePoint.position, quaternion.identity);
             obj.GetComponent<Rigidbody2D>().AddForce(_fireRay.direction * platformForce);
-        }
+        }*/
     }
 
     private void ApplyLightDirection()
@@ -226,7 +241,7 @@ public class PlayerController : MonoBehaviour
             fruitCount++;
         }
 
-        if (col.transform.CompareTag("DeadZone") || col.transform.CompareTag("Enemy"))
+        if (col.transform.CompareTag("DeadZone") || col.transform.CompareTag("Enemy") || col.transform.CompareTag("Meteorite"))
         {
             transform.position = spawnPoint.position;
         }

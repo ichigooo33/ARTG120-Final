@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -69,6 +68,10 @@ public class ObjectPool : MonoBehaviour
 
     public void SetObject(string tag, GameObject gameObject)
     {
+        if (gameObject.CompareTag("Platform"))
+        {
+            gameObject.GetComponent<GrassBullet>()._lifeTimeCounter = 0;
+        }
         gameObject.SetActive(false);
         _poolDictionary[tag].Enqueue(gameObject);
     }

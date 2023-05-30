@@ -14,6 +14,10 @@ public class Platform : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D col)
     {
+        if (col.transform.CompareTag("Enemy"))
+        {
+            Destroy(col.gameObject);
+        }
         if (col.transform.CompareTag("Map"))
         {
             _rb.bodyType = RigidbodyType2D.Static;

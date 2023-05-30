@@ -8,6 +8,8 @@ TagManager:
   - Enemy
   - Fruit
   - DeadZone
+  - Meteorite
+  - Platform
   layers:
   - Default
   - TransparentFX
