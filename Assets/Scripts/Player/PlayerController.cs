@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public Transform spawnPoint;
     public Transform firePoint;
     public Transform groundCheckRayPoint;
+    public Transform lightPoint;
     
     //Define Variables and Settings
     [Header("Player Variables")]
@@ -25,6 +26,7 @@ public class PlayerController : MonoBehaviour
     [Header("Player Status")]
     public bool isGround = false;
     public bool facingRight = true;
+    public int facingIndex = 1;
     
     [Header("Bullet/Platform Variables")]
     public float bulletForce;
@@ -60,9 +62,12 @@ public class PlayerController : MonoBehaviour
         CheckMovementInput();
         
         //Update aim ray
-        _mousePos = new Vector2(Input.mousePosition.x - _screenCenter.x, Input.mousePosition.y - _screenCenter.y);
+        _mousePos = new Vector2(Input.mousePosition.x - _screenCenter.x, Input.mousePosition.y - _screenCenter.y).normalized;
         _fireRay = new Ray(firePoint.position, _mousePos);
         Debug.DrawRay(_fireRay.origin, _fireRay.direction * 20, Color.red);
+
+        //Update player's light direction
+        ApplyLightDirection();
         
         //Player fire
         Fire();
@@ -128,12 +133,14 @@ public class PlayerController : MonoBehaviour
             //Turn left
             transform.Rotate(Vector3.up, 180);
             facingRight = false;
+            facingIndex = -1;
         }
         else if (_movementInputDirection > 0 && !facingRight)
         {
             //Turn right
             transform.Rotate(Vector3.up, 180);
             facingRight = true;
+            facingIndex = 1;
         }
         
         //Apply player's horizontal movement
@@ -190,6 +197,24 @@ public class PlayerController : MonoBehaviour
             fruitCount--;
             GameObject obj = ObjectPool.Instance.GetObject("F_Orange", firePoint.position, quaternion.identity);
             obj.GetComponent<Rigidbody2D>().AddForce(_fireRay.direction * platformForce);
+        }
+    }
+
+    private void ApplyLightDirection()
+    {
+        lightPoint.rotation = Quaternion.Euler(0, 0, InBetweenAngleOfVectors(Vector3.right, _fireRay.direction));
+    }
+
+    private float InBetweenAngleOfVectors(Vector3 fromVector, Vector3 toVector)
+    {
+        Vector3 tempVector3 = Vector3.Cross(fromVector, toVector);
+        if (tempVector3.z > 0)
+        {
+            return Vector3.Angle(fromVector, toVector);
+        }
+        else
+        {
+            return 360 - Vector3.Angle(fromVector, toVector);
         }
     }
 
