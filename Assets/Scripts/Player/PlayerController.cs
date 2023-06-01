@@ -1,3 +1,4 @@
+using System;
 using Unity.Mathematics;
 using UnityEngine;
 using Quaternion = UnityEngine.Quaternion;
@@ -9,12 +10,15 @@ public class PlayerController : MonoBehaviour
     //Define transforms
     public Transform spawnPoint;
     public Transform firePoint;
-    public Transform groundCheckRayPoint;
+    public Transform groundCheckRayPoint_Left;
+    public Transform groundCheckRayPoint_Right;
     public Transform lightPoint;
     
     //Define Variables and Settings
     [Header("Player Variables")]
     public float moveSpeed;
+    [Range(0, 10)]
+    public float moveSpeedChangeFactor;
     public float jumpForce;
     public int fruitCount;
     public float movementForceInAir;
@@ -27,23 +31,28 @@ public class PlayerController : MonoBehaviour
     public bool isGround = false;
     public bool facingRight = true;
     public int facingIndex = 1;
-    public string currentBullet;
+    public string currentBulletName;
 
     [Header("Bullet/Platform Variables")] 
     public float fireRayDetectionMaxDistance;
-    public float bulletForce;
+    [Range(0, 1)]
+    public float firePointMoveRange;
     public float fireCoolDownTime = 1;
+    public float bulletForce;
     public float platformForce;
+    public string[] bulletArray;
 
     private Vector2 _screenCenter = new (Screen.width / 2, Screen.height / 2);
+    private int _currentBulletIndex = 0;
 
     //Define Components
     private Rigidbody2D _rb;
+    private SpriteRenderer _sr;
     
     //Private stuff used for control
     private LayerMask _onlyGroundLayer;
     private LayerMask _ignorePlayerLayer;
-    
+
     private float _movementInputDirection;
     private Vector2 _airForce;
     
@@ -55,10 +64,12 @@ public class PlayerController : MonoBehaviour
     {
         //Get player's own components
         _rb = GetComponent<Rigidbody2D>();
+        _sr = GetComponent<SpriteRenderer>();
         
         _onlyGroundLayer = 1 << 3;
 
-        currentBullet = "GrassBullet";
+        //Set current bullet
+        currentBulletName = bulletArray[_currentBulletIndex];
     }
 
     private void Update()
@@ -89,10 +100,15 @@ public class PlayerController : MonoBehaviour
 
     private void GroundCheck()
     {
-        RaycastHit2D groundHit = Physics2D.Raycast(groundCheckRayPoint.position, Vector2.down, 0.5f, _onlyGroundLayer);
-        if (!groundHit)
+        RaycastHit2D groundHitLeft = Physics2D.Raycast(groundCheckRayPoint_Left.position, Vector2.down, 0.5f, _onlyGroundLayer);
+        RaycastHit2D groundHitRight = Physics2D.Raycast(groundCheckRayPoint_Right.position, Vector2.down, 0.5f, _onlyGroundLayer);
+
+        //Check left side
+        if (!groundHitLeft && !groundHitRight)
         {
-            Debug.DrawRay(groundCheckRayPoint.position, Vector3.down * 0.5f, Color.red);
+            Debug.DrawRay(groundCheckRayPoint_Left.position, Vector3.down * 0.5f, Color.red);
+            Debug.DrawRay(groundCheckRayPoint_Right.position, Vector3.down * 0.5f, Color.red);
+            
             if (isGround)
             {
                 isGround = false;
@@ -100,7 +116,21 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            Debug.DrawRay(groundCheckRayPoint.position, Vector3.down * 0.5f, Color.green);
+            if (!groundHitLeft)
+            {
+                Debug.DrawRay(groundCheckRayPoint_Left.position, Vector3.down * 0.5f, Color.red);
+                Debug.DrawRay(groundCheckRayPoint_Right.position, Vector3.down * 0.5f, Color.green);
+            }
+            else if (!groundHitRight)
+            {
+                Debug.DrawRay(groundCheckRayPoint_Left.position, Vector3.down * 0.5f, Color.green);
+                Debug.DrawRay(groundCheckRayPoint_Right.position, Vector3.down * 0.5f, Color.red);
+            }
+            else
+            {
+                Debug.DrawRay(groundCheckRayPoint_Left.position, Vector3.down * 0.5f, Color.green);
+                Debug.DrawRay(groundCheckRayPoint_Right.position, Vector3.down * 0.5f, Color.green);
+            }
             if (!isGround)
             {
                 isGround = true;
@@ -127,17 +157,21 @@ public class PlayerController : MonoBehaviour
     private void ApplyMovementInput()
     {
         //Rotate the player if moving toward different direction
+        var tempLightPointLocalPosition = lightPoint.localPosition;
+        
         if (_movementInputDirection < 0 && facingRight)
         {
             //Turn left
-            transform.Rotate(Vector3.up, 180);
+            lightPoint.localPosition = new Vector3(-tempLightPointLocalPosition.x, tempLightPointLocalPosition.y, 0);
+            _sr.flipX = !_sr.flipX;
             facingRight = false;
             facingIndex = -1;
         }
         else if (_movementInputDirection > 0 && !facingRight)
         {
             //Turn right
-            transform.Rotate(Vector3.up, 180);
+            lightPoint.localPosition = new Vector3(-tempLightPointLocalPosition.x, tempLightPointLocalPosition.y, 0);
+            _sr.flipX = !_sr.flipX;
             facingRight = true;
             facingIndex = 1;
         }
@@ -145,18 +179,18 @@ public class PlayerController : MonoBehaviour
         //Apply player's horizontal movement
         if (isGround)
         {
-            _rb.velocity = new Vector2(_movementInputDirection * moveSpeed, _rb.velocity.y);
+            var tempVelocity = _rb.velocity;
+            //_rb.velocity = Vector2.SmoothDamp(tempVelocity, new Vector2(_movementInputDirection * moveSpeed, tempVelocity.y), ref tempVelocity, moveSpeedChangeTime);
+            _rb.velocity = Vector2.Lerp(tempVelocity, new Vector2(_movementInputDirection * moveSpeed, tempVelocity.y), moveSpeedChangeFactor * Time.fixedDeltaTime);
+            //_rb.velocity = new Vector2(_movementInputDirection * moveSpeed, _rb.velocity.y);
         }
         else if (_movementInputDirection != 0)
         {
             _airForce = new Vector2(movementForceInAir * _movementInputDirection, 0);
             _rb.AddForce(_airForce);
 
-            //Lerp _rb.velocity if the velocity exceeds moveSpeed after adding force 
-            if (Mathf.Abs(_rb.velocity.x) > moveSpeed)
-            {
-                _rb.velocity = new Vector2(_movementInputDirection * moveSpeed, _rb.velocity.y);
-            }
+            //Clamp _rb.velocity if the velocity exceeds moveSpeed after adding force
+            _rb.velocity = new Vector2(Mathf.Clamp(_rb.velocity.x, -moveSpeed, moveSpeed), _rb.velocity.y);
         }
         else if (_movementInputDirection == 0)
         {
@@ -177,16 +211,21 @@ public class PlayerController : MonoBehaviour
     // ReSharper disable Unity.PerformanceAnalysis
     private void MouseInputUpdate()
     {
-        //Update aim ray
-        _mousePos = new Vector2(Input.mousePosition.x - _screenCenter.x, Input.mousePosition.y - _screenCenter.y).normalized;
+        //Update aim ray and move firePoint based on mouse position
+        _mousePos = new Vector2(Input.mousePosition.x - _screenCenter.x, Input.mousePosition.y - _screenCenter.y).normalized * firePointMoveRange;  //Multiply normalized vector to control firePoint's range
+        Vector3 playerPosition = transform.position;
+        firePoint.position = new Vector3(playerPosition.x + _mousePos.x, playerPosition.y + _mousePos.y, 0);
         _fireRay = new Ray(firePoint.position, _mousePos);
         Debug.DrawRay(_fireRay.origin, _fireRay.direction * fireRayDetectionMaxDistance, Color.red);
-
+        
+        //If the player aims at platform and right click, take back the platform
         RaycastHit2D fireRayHit = Physics2D.Raycast(_fireRay.origin, _fireRay.direction, fireRayDetectionMaxDistance, _onlyGroundLayer);
-
         if(Input.GetMouseButtonDown(1) && fireRayHit && fireRayHit.transform.CompareTag("Platform"))
         {
-            ObjectPool.Instance.SetObject(fireRayHit.transform.name, fireRayHit.transform.gameObject);
+            //Reset platform's layer to default "Ignore Player"
+            GameObject tempObj;
+            (tempObj = fireRayHit.transform.gameObject).layer = LayerMask.NameToLayer("Ignore Player");
+            ObjectPool.Instance.SetObject(fireRayHit.transform.name, tempObj);
         }
     }
 
@@ -199,7 +238,7 @@ public class PlayerController : MonoBehaviour
             _fireCounter = 0;
             
             //Get bullet from the ObjectPool
-            GameObject obj = ObjectPool.Instance.GetObject(currentBullet, firePoint.position, Quaternion.identity);
+            GameObject obj = ObjectPool.Instance.GetObject(currentBulletName, firePoint.position, Quaternion.identity);
             obj.GetComponent<Rigidbody2D>().AddForce(_fireRay.direction * bulletForce);
         }
     }

@@ -30,6 +30,8 @@ public class GrassBullet : MonoBehaviour
     // ReSharper disable Unity.PerformanceAnalysis
     private void BackToObjectPool()
     {
+        //Reset platform's layer to default "Ignore Player"
+        gameObject.layer = LayerMask.NameToLayer("Ignore Player");
         ObjectPool.Instance.SetObject("GrassBullet", gameObject);
     }
 
@@ -39,9 +41,14 @@ public class GrassBullet : MonoBehaviour
         {
             Destroy(col.gameObject);
         }
-        
-        if (col.transform.CompareTag("Map"))
+        else if (col.transform.CompareTag("Meteorite") || col.transform.CompareTag("Platform"))
         {
+            return;
+        }
+        else
+        {
+            //Once collide with Map, platform changes its layer from "Ignore Player" to "Ground"
+            gameObject.layer = LayerMask.NameToLayer("Ground");
             _rb.bodyType = RigidbodyType2D.Static;
         }
     }

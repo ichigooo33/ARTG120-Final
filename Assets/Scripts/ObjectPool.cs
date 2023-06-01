@@ -66,13 +66,13 @@ public class ObjectPool : MonoBehaviour
         return tempObj;
     }
 
-    public void SetObject(string tag, GameObject gameObject)
+    public void SetObject(string gameObjectName, GameObject gameObject)
     {
         if (gameObject.CompareTag("Platform"))
         {
             gameObject.GetComponent<GrassBullet>()._lifeTimeCounter = 0;
         }
         gameObject.SetActive(false);
-        _poolDictionary[tag].Enqueue(gameObject);
+        _poolDictionary[gameObjectName].Enqueue(gameObject);
     }
 }

@@ -11,8 +11,7 @@ GameObject:
   - component: {fileID: 3426153591954240472}
   - component: {fileID: 1159069984979380335}
   - component: {fileID: 7289500820023640978}
-  - component: {fileID: -203052916442827177}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: C_Orange
   m_TagString: Fruit
   m_Icon: {fileID: 0}
@@ -73,7 +72,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 571604741
-  m_SortingLayer: 4
+  m_SortingLayer: -3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 5e796b14cba71a44ca566b98a45d4749, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -112,15 +111,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.6487129, y: 0.6438338}
   m_EdgeRadius: 0
---- !u!114 &-203052916442827177
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7285974219825969263}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d373463c523cb99468fc602ad878f77d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7289500820023640978}
   - component: {fileID: 4835391631366552551}
   - component: {fileID: 8751265343165375086}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: GrassBullet
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -146,5 +146,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f310abdfdfe6434d97d584ca5152eb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifeSpan: 5
+  lifeSpan: 8
   fallTime: 0.5
+  _lifeTimeCounter: 0
