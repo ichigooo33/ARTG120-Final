@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour
     public float fireCoolDownTime = 1;
     public float bulletForce;
     public float platformForce;
-    public string[] bulletArray;
+    public string[] bulletNameArray;
 
     private Vector2 _screenCenter = new (Screen.width / 2, Screen.height / 2);
     private int _currentBulletIndex = 0;
@@ -69,7 +69,7 @@ public class PlayerController : MonoBehaviour
         _onlyGroundLayer = 1 << 3;
 
         //Set current bullet
-        currentBulletName = bulletArray[_currentBulletIndex];
+        currentBulletName = bulletNameArray[_currentBulletIndex];
     }
 
     private void Update()
@@ -81,6 +81,9 @@ public class PlayerController : MonoBehaviour
 
         //Update player's light direction
         ApplyLightDirection();
+        
+        //Check if the player swaps the bullet
+        CheckBulletSwap();
         
         //Player fire
         Fire();
@@ -226,6 +229,21 @@ public class PlayerController : MonoBehaviour
             GameObject tempObj;
             (tempObj = fireRayHit.transform.gameObject).layer = LayerMask.NameToLayer("Ignore Player");
             ObjectPool.Instance.SetObject(fireRayHit.transform.name, tempObj);
+        }
+    }
+
+    private void CheckBulletSwap()
+    {
+        //Press "F" to change bullet
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            _currentBulletIndex++;
+            if (_currentBulletIndex >= bulletNameArray.Length)
+            {
+                _currentBulletIndex -= bulletNameArray.Length;
+            }
+
+            currentBulletName = bulletNameArray[_currentBulletIndex];
         }
     }
 

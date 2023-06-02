@@ -68,10 +68,6 @@ public class ObjectPool : MonoBehaviour
 
     public void SetObject(string gameObjectName, GameObject gameObject)
     {
-        if (gameObject.CompareTag("Platform"))
-        {
-            gameObject.GetComponent<GrassBullet>()._lifeTimeCounter = 0;
-        }
         gameObject.SetActive(false);
         _poolDictionary[gameObjectName].Enqueue(gameObject);
     }

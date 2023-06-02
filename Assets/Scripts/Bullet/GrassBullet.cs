@@ -31,6 +31,7 @@ public class GrassBullet : MonoBehaviour
     private void BackToObjectPool()
     {
         //Reset platform's layer to default "Ignore Player"
+        _lifeTimeCounter = 0;
         gameObject.layer = LayerMask.NameToLayer("Ignore Player");
         ObjectPool.Instance.SetObject("GrassBullet", gameObject);
     }
