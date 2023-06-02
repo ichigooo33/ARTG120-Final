@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class FireEnemy : MonoBehaviour
 {
     [Header("Transforms for detection")]
     public Transform player;
@@ -8,24 +8,44 @@ public class Enemy : MonoBehaviour
 
     [Header("Enemy Variables")]
     public float moveSpeed;
-    public float waitTimeForChangingDirection = 0.5f;
+    public float waitTimeForChangingDirection = 0.2f;
+    public bool isFrozen = false;
+    public float FrozeTime;
+
+    [Header("Froze Sprite")] 
+    public Sprite LavaSlimeSprite;
+    public Sprite frozeLavaSlimeSprite;
 
     //Define components
     private Rigidbody2D _rb2D;
+    private SpriteRenderer _sr;
 
     //Define private variables
     private bool _isMoving = true;
     private int _moveDirectionIndex = 1;
-
+    private float _frozeTimer;
+    
     private void Start()
     {
         _rb2D = GetComponent<Rigidbody2D>();
+        _sr = GetComponent<SpriteRenderer>();
     }
 
     private void FixedUpdate()
     {
+        if (isFrozen)
+        {
+            _frozeTimer += Time.fixedDeltaTime;
+            if (_frozeTimer >= FrozeTime)
+            {
+                _sr.sprite = LavaSlimeSprite;
+                isFrozen = false;
+                _frozeTimer = 0;
+            }
+        }
+
         //Change direction when no ground ahead OR something in front of the enemy
-        if (_isMoving)
+        if (!isFrozen && _isMoving)
         {
             GroundCheck();
             MovingDirectionCheck();
@@ -84,5 +104,15 @@ public class Enemy : MonoBehaviour
         moveSpeed *= -1;
         _moveDirectionIndex *= -1;
         _isMoving = true;
+    }
+
+    private void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.transform.CompareTag("Platform") && col.transform.name[0] == 'W')
+        {
+            //Froze LavaSlime and change sprite
+            isFrozen = true;
+            _sr.sprite = frozeLavaSlimeSprite;
+        }
     }
 }

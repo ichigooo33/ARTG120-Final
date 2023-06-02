@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer _sr;
     
     //Private stuff used for control
-    private LayerMask _onlyGroundLayer;
+    private LayerMask _GroundAndFireEnmeyLayer;
     private LayerMask _ignorePlayerLayer;
 
     private float _movementInputDirection;
@@ -66,7 +66,7 @@ public class PlayerController : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
         _sr = GetComponent<SpriteRenderer>();
         
-        _onlyGroundLayer = 1 << 3;
+        _GroundAndFireEnmeyLayer = (1 << 3) | (1 << 9);
 
         //Set current bullet
         currentBulletName = bulletNameArray[_currentBulletIndex];
@@ -103,8 +103,8 @@ public class PlayerController : MonoBehaviour
 
     private void GroundCheck()
     {
-        RaycastHit2D groundHitLeft = Physics2D.Raycast(groundCheckRayPoint_Left.position, Vector2.down, 0.5f, _onlyGroundLayer);
-        RaycastHit2D groundHitRight = Physics2D.Raycast(groundCheckRayPoint_Right.position, Vector2.down, 0.5f, _onlyGroundLayer);
+        RaycastHit2D groundHitLeft = Physics2D.Raycast(groundCheckRayPoint_Left.position, Vector2.down, 0.5f, _GroundAndFireEnmeyLayer);
+        RaycastHit2D groundHitRight = Physics2D.Raycast(groundCheckRayPoint_Right.position, Vector2.down, 0.5f, _GroundAndFireEnmeyLayer);
 
         //Check left side
         if (!groundHitLeft && !groundHitRight)
@@ -222,7 +222,7 @@ public class PlayerController : MonoBehaviour
         Debug.DrawRay(_fireRay.origin, _fireRay.direction * fireRayDetectionMaxDistance, Color.red);
         
         //If the player aims at platform and right click, take back the platform
-        RaycastHit2D fireRayHit = Physics2D.Raycast(_fireRay.origin, _fireRay.direction, fireRayDetectionMaxDistance, _onlyGroundLayer);
+        RaycastHit2D fireRayHit = Physics2D.Raycast(_fireRay.origin, _fireRay.direction, fireRayDetectionMaxDistance, _GroundAndFireEnmeyLayer);
         if(Input.GetMouseButtonDown(1) && fireRayHit && fireRayHit.transform.CompareTag("Platform"))
         {
             //Reset platform's layer to default "Ignore Player"
@@ -290,6 +290,18 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void BackToSpawnPoint()
+    {
+        gameObject.SetActive(false);
+        Invoke("ActivatePlayer", 1.5f);
+    }
+
+    private void ActivatePlayer()
+    {
+        transform.position = spawnPoint.position;
+        gameObject.SetActive(true);
+    }
+
     private void OnCollisionEnter2D(Collision2D col)
     {
         if (col.transform.CompareTag("Fruit"))
@@ -297,19 +309,16 @@ public class PlayerController : MonoBehaviour
             Destroy(col.gameObject);
             fruitCount++;
         }
-
-        if (col.transform.CompareTag("DeadZone") || col.transform.CompareTag("Enemy") || col.transform.CompareTag("Meteorite"))
+        
+        //If player collides with LavaSlime and LavaSlime is frozen, LavaSlime doesn't kill the player
+        if (col.transform.name[0] == 'L' && col.transform.GetComponent<FireEnemy>().isFrozen)
         {
-            transform.position = spawnPoint.position;
+            return;
         }
-    }
 
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        if (Input.GetKeyDown(KeyCode.R) && (collision.transform.name[0].ToString() == "F"))
+        if (col.transform.CompareTag("DeadZone") || col.transform.CompareTag("Enemy") || col.transform.CompareTag("FireEnemy") || col.transform.CompareTag("Meteorite"))
         {
-            ObjectPool.Instance.SetObject("F_Orange", collision.gameObject);
-            fruitCount++;
+            BackToSpawnPoint();
         }
     }
 }

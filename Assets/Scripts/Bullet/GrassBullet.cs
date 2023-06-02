@@ -38,7 +38,11 @@ public class GrassBullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.transform.CompareTag("Enemy"))
+        if (col.transform.CompareTag("FireEnemy"))
+        {
+            BackToObjectPool();
+        }
+        else if (col.transform.CompareTag("Enemy"))
         {
             Destroy(col.gameObject);
         }
