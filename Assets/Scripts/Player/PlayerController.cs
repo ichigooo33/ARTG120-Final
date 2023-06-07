@@ -311,7 +311,7 @@ public class PlayerController : MonoBehaviour
         }
         
         //If player collides with LavaSlime and LavaSlime is frozen, LavaSlime doesn't kill the player
-        if (col.transform.name[0] == 'L' && col.transform.GetComponent<FireEnemy>().isFrozen)
+        if (col.transform.CompareTag("FireEnemy") && col.transform.GetComponent<FireEnemy>().isFrozen)
         {
             return;
         }
