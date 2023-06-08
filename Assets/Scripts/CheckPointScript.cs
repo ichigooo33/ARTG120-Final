@@ -4,7 +4,12 @@ using UnityEngine;
 public class CheckPointScript : MonoBehaviour
 {
     private BoxCollider2D _col;
+    public PlayerController PlayerControllerScript;
 
+    public bool canUnlockBranch;
+    public bool canUnlockWater;
+    public bool canUnlockFire;
+    
     private void Start()
     {
         _col = GetComponent<BoxCollider2D>();
@@ -14,8 +19,26 @@ public class CheckPointScript : MonoBehaviour
     {
         if (col.transform.CompareTag("Player"))
         {
-            Debug.Log("ENTER");
-            col.transform.GetComponent<PlayerController>().spawnPoint = transform;
+            Debug.Log("CHECK POINT ENTER");
+            PlayerControllerScript.spawnPoint = transform;
+
+            if (!PlayerControllerScript.unlockBranch && canUnlockBranch)
+            {
+                PlayerControllerScript.unlockBranch = true;
+                Debug.Log("UNLOCK BRANCH");
+            }
+            
+            if (!PlayerControllerScript.unlockWater && canUnlockWater)
+            {
+                PlayerControllerScript.unlockWater = true;
+                Debug.Log("UNLOCK WATER");
+            }
+            
+            if (!PlayerControllerScript.unlockFire && canUnlockFire)
+            {
+                PlayerControllerScript.unlockFire = true;
+                Debug.Log("UNLOCK FIRE");
+            }
         }
     }
 }

@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3329673144438441630}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.198, y: -0.436, z: 0}
+  m_LocalPosition: {x: 0.099, y: -0.365, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -55,7 +55,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3633799578924360952}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.11, y: -0.425, z: 0}
+  m_LocalPosition: {x: -0.059, y: -0.365, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -327,7 +327,7 @@ Transform:
   m_GameObject: {fileID: 4359061092465270786}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.96, y: -0.81, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4359061091544014769}
@@ -378,12 +378,12 @@ SpriteRenderer:
   m_SortingLayerID: 360272653
   m_SortingLayer: -1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 0c2213029cc41fc44ad39f81589d1b35, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2bea189ec8b9f2b4d8eaef212dba1eae, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2, y: 2}
+  m_Size: {x: 4, y: 4}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -402,18 +402,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.053894997, y: -0.14260948}
+  m_Offset: {x: 0.037659287, y: -0.00059247017}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 1, y: 1}
-    newSize: {x: 2, y: 2}
+    newSize: {x: 4, y: 4}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.4138708, y: 0.67006016}
+  m_Size: {x: 0.28860354, y: 0.9575896}
   m_EdgeRadius: 0
 --- !u!50 &4359061092465270846
 Rigidbody2D:
@@ -453,23 +453,31 @@ MonoBehaviour:
   groundCheckRayPoint_Left: {fileID: 2589825441891381247}
   groundCheckRayPoint_Right: {fileID: 11543874725164567}
   lightPoint: {fileID: 4088658756116535462}
+  playerSpriteArray: []
+  bulletIcon: {fileID: 0}
+  abilityChangeIcon: {fileID: 0}
   moveSpeed: 8
-  moveSpeedChangeFactor: 0
-  jumpForce: 16
+  moveSpeedChangeFactor: 5
+  jumpForce: 17
   fruitCount: 0
-  movementForceInAir: 20
+  movementForceInAir: 10
   airDragMultiplier: 0.95
   smallJumpMultiplier: 0.5
   isGround: 0
   facingRight: 1
   facingIndex: 1
   currentBulletName: 
-  fireRayDetectionMaxDistance: 0
-  firePointMoveRange: 0
+  unlockBranch: 0
+  unlockWater: 0
+  unlockFire: 0
+  fireRayDetectionMaxDistance: 10
+  firePointMoveRange: 0.6
   fireCoolDownTime: 1
   bulletForce: 600
   platformForce: 500
-  bulletNameArray: []
+  bulletNameArray:
+  - GrassBullet
+  - WaterBullet
 --- !u!114 &-1966026208465847542
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -492,15 +500,15 @@ MonoBehaviour:
   m_ShapePath:
   - {x: -0.18465972, y: -0.48171934, z: 0}
   - {x: -0.08522534, y: -0.1417714, z: 0}
-  - {x: -0.40970612, y: 0.045604795, z: 0}
-  - {x: 0.1718123, y: 0.47714934, z: 0}
-  - {x: 0.19379997, y: 0.30348352, z: 0}
-  - {x: 0.47690344, y: 0.036464483, z: 0}
-  - {x: 0.26667643, y: -0.1417714, z: 0}
-  - {x: 0.28063273, y: -0.47714916, z: 0}
-  m_ShapePathHash: 1614801069
+  - {x: -0.09318662, y: 0.002083391, z: 0}
+  - {x: -0.1447072, y: 0.48110583, z: 0}
+  - {x: 0.17006111, y: 0.32722247, z: 0}
+  - {x: 0.23555756, y: 0.048333943, z: 0}
+  - {x: 0.18359017, y: -0.1457279, z: 0}
+  - {x: 0.18963337, y: -0.4811056, z: 0}
+  m_ShapePathHash: -1279711391
   m_Mesh: {fileID: 0}
-  m_InstanceId: 35570
+  m_InstanceId: -2194
   m_LocalBounds:
-    m_Center: {x: 0.03359866, y: -0.0022850037, z: 0}
-    m_Extent: {x: 0.44330478, y: 0.47943434, z: 0}
+    m_Center: {x: 0.025448918, y: -0.0003067553, z: 0}
+    m_Extent: {x: 0.21010864, y: 0.4814126, z: 0}

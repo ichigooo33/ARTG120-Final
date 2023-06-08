@@ -1,5 +1,4 @@
 using System;
-using Unity.Mathematics;
 using UnityEngine;
 using Quaternion = UnityEngine.Quaternion;
 using Vector2 = UnityEngine.Vector2;
@@ -13,6 +12,13 @@ public class PlayerController : MonoBehaviour
     public Transform groundCheckRayPoint_Left;
     public Transform groundCheckRayPoint_Right;
     public Transform lightPoint;
+    
+    [Header("Player Sprite Array")]
+    public Sprite[] playerSpriteArray;
+
+    [Header("UI Image")] 
+    public GameObject bulletIcon;
+    public GameObject abilityChangeIcon;
     
     //Define Variables and Settings
     [Header("Player Variables")]
@@ -32,6 +38,11 @@ public class PlayerController : MonoBehaviour
     public bool facingRight = true;
     public int facingIndex = 1;
     public string currentBulletName;
+
+    [Header("Player Ability")] 
+    public bool unlockBranch ;
+    public bool unlockWater;
+    public bool unlockFire;
 
     [Header("Bullet/Platform Variables")] 
     public float fireRayDetectionMaxDistance;
@@ -70,6 +81,10 @@ public class PlayerController : MonoBehaviour
 
         //Set current bullet
         currentBulletName = bulletNameArray[_currentBulletIndex];
+        
+        //Set UI icons as inactive at beginning before the player unlock any ability
+        bulletIcon.SetActive(false);
+        abilityChangeIcon.SetActive(false);
     }
 
     private void Update()
@@ -91,9 +106,6 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //Add time to counter
-        _fireCounter += Time.fixedDeltaTime;
-        
         //Check ground and update isGround
         GroundCheck();
 
@@ -234,6 +246,12 @@ public class PlayerController : MonoBehaviour
 
     private void CheckBulletSwap()
     {
+        //Return if the player doesn't unlock any ability
+        if (!unlockBranch)
+        {
+            return;
+        }
+        
         //Press "F" to change bullet
         if (Input.GetKeyDown(KeyCode.F))
         {
@@ -244,13 +262,17 @@ public class PlayerController : MonoBehaviour
             }
 
             currentBulletName = bulletNameArray[_currentBulletIndex];
+            _sr.sprite = playerSpriteArray[_currentBulletIndex];
         }
     }
 
     // ReSharper disable Unity.PerformanceAnalysis
     private void Fire()
     {
-        if (Input.GetMouseButton(0) && _fireCounter > fireCoolDownTime)
+        //Add time to counter
+        _fireCounter += Time.fixedDeltaTime;
+
+        if (Input.GetMouseButton(0) && _fireCounter > fireCoolDownTime && unlockBranch)
         {
             //Reset the counter
             _fireCounter = 0;
@@ -300,6 +322,15 @@ public class PlayerController : MonoBehaviour
     {
         transform.position = spawnPoint.position;
         gameObject.SetActive(true);
+    }
+    
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.transform.CompareTag("CheckPoint") && col.transform.GetComponent<CheckPointScript>().canUnlockBranch)
+        {
+            bulletIcon.SetActive(true);
+            abilityChangeIcon.SetActive(true);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D col)

@@ -11,6 +11,7 @@ TagManager:
   - Meteorite
   - Platform
   - FireEnemy
+  - CheckPoint
   layers:
   - Default
   - TransparentFX
