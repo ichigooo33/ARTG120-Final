@@ -4,9 +4,9 @@ using UnityEngine.UI;
 public class BulletIconSelector : MonoBehaviour
 {
     public Sprite[] bulletIconArray;
+    public PlayerController PlayerControllerScript;
     
     private Image _image;
-    private int _bulletIconIndex;
     private void Start()
     {
         _image = GetComponent<Image>();
@@ -16,13 +16,7 @@ public class BulletIconSelector : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
-            _bulletIconIndex++;
-            if (_bulletIconIndex >= bulletIconArray.Length)
-            {
-                _bulletIconIndex -= bulletIconArray.Length;
-            }
-
-            _image.sprite = bulletIconArray[_bulletIconIndex];
+            _image.sprite = bulletIconArray[PlayerControllerScript.currentBulletIndex];
         }
     }
 }

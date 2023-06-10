@@ -111,7 +111,7 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 1
   m_Color: {r: 0.38823533, g: 0.8117648, b: 0.9058824, a: 1}
-  m_Intensity: 1
+  m_Intensity: 0.6
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
   m_ApplyToSortingLayers: 05ff1122efacdb280d53791500000000
@@ -402,7 +402,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.037659287, y: -0.00059247017}
+  m_Offset: {x: 0.037659287, y: -0.067852855}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -413,7 +413,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.28860354, y: 0.9575896}
+  m_Size: {x: 0.28860354, y: 0.82306886}
   m_EdgeRadius: 0
 --- !u!50 &4359061092465270846
 Rigidbody2D:
@@ -453,7 +453,11 @@ MonoBehaviour:
   groundCheckRayPoint_Left: {fileID: 2589825441891381247}
   groundCheckRayPoint_Right: {fileID: 11543874725164567}
   lightPoint: {fileID: 4088658756116535462}
-  playerSpriteArray: []
+  playerSpriteArray:
+  - {fileID: 21300000, guid: 2bea189ec8b9f2b4d8eaef212dba1eae, type: 3}
+  - {fileID: 21300000, guid: d0c2d33d51d449d4ab65baca46b64321, type: 3}
+  - {fileID: 21300000, guid: 238a7dbda4dae2742ae9e7240a694a7c, type: 3}
+  - {fileID: 21300000, guid: 82bc3242ca5f45d439dc5b631f035d19, type: 3}
   bulletIcon: {fileID: 0}
   abilityChangeIcon: {fileID: 0}
   moveSpeed: 8
@@ -466,7 +470,9 @@ MonoBehaviour:
   isGround: 0
   facingRight: 1
   facingIndex: 1
+  currentSpriteIndex: 0
   currentBulletName: 
+  currentBulletIndex: 0
   unlockBranch: 0
   unlockWater: 0
   unlockFire: 0
@@ -508,7 +514,7 @@ MonoBehaviour:
   - {x: 0.18963337, y: -0.4811056, z: 0}
   m_ShapePathHash: -1279711391
   m_Mesh: {fileID: 0}
-  m_InstanceId: -2194
+  m_InstanceId: -2262
   m_LocalBounds:
     m_Center: {x: 0.025448918, y: -0.0003067553, z: 0}
     m_Extent: {x: 0.21010864, y: 0.4814126, z: 0}

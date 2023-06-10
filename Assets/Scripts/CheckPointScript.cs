@@ -21,24 +21,6 @@ public class CheckPointScript : MonoBehaviour
         {
             Debug.Log("CHECK POINT ENTER");
             PlayerControllerScript.spawnPoint = transform;
-
-            if (!PlayerControllerScript.unlockBranch && canUnlockBranch)
-            {
-                PlayerControllerScript.unlockBranch = true;
-                Debug.Log("UNLOCK BRANCH");
-            }
-            
-            if (!PlayerControllerScript.unlockWater && canUnlockWater)
-            {
-                PlayerControllerScript.unlockWater = true;
-                Debug.Log("UNLOCK WATER");
-            }
-            
-            if (!PlayerControllerScript.unlockFire && canUnlockFire)
-            {
-                PlayerControllerScript.unlockFire = true;
-                Debug.Log("UNLOCK FIRE");
-            }
         }
     }
 }

@@ -37,12 +37,14 @@ public class PlayerController : MonoBehaviour
     public bool isGround = false;
     public bool facingRight = true;
     public int facingIndex = 1;
+    public int currentSpriteIndex = 0;
     public string currentBulletName;
+    public int currentBulletIndex = 0;
 
     [Header("Player Ability")] 
-    public bool unlockBranch ;
-    public bool unlockWater;
-    public bool unlockFire;
+    public bool unlockBranch = false;
+    public bool unlockWater = false;
+    public bool unlockFire = false;
 
     [Header("Bullet/Platform Variables")] 
     public float fireRayDetectionMaxDistance;
@@ -54,7 +56,6 @@ public class PlayerController : MonoBehaviour
     public string[] bulletNameArray;
 
     private Vector2 _screenCenter = new (Screen.width / 2, Screen.height / 2);
-    private int _currentBulletIndex = 0;
 
     //Define Components
     private Rigidbody2D _rb;
@@ -80,11 +81,16 @@ public class PlayerController : MonoBehaviour
         _GroundAndFireEnmeyLayer = (1 << 3) | (1 << 9);
 
         //Set current bullet
-        currentBulletName = bulletNameArray[_currentBulletIndex];
+        currentBulletName = bulletNameArray[currentBulletIndex];
         
         //Set UI icons as inactive at beginning before the player unlock any ability
         bulletIcon.SetActive(false);
         abilityChangeIcon.SetActive(false);
+        
+        //Reset player's ability
+        unlockBranch = false;
+        unlockWater = false;
+        unlockFire = false;
     }
 
     private void Update()
@@ -247,23 +253,61 @@ public class PlayerController : MonoBehaviour
     private void CheckBulletSwap()
     {
         //Return if the player doesn't unlock any ability
-        if (!unlockBranch)
+        
+        //When player doesn't have ability or only one
+        if (!unlockBranch || !unlockWater)
         {
             return;
         }
         
-        //Press "F" to change bullet
-        if (Input.GetKeyDown(KeyCode.F))
+        if (!unlockFire)
         {
-            _currentBulletIndex++;
-            if (_currentBulletIndex >= bulletNameArray.Length)
+            //When player has two abilities
+            if (Input.GetKeyDown(KeyCode.F))
             {
-                _currentBulletIndex -= bulletNameArray.Length;
-            }
+                currentBulletIndex++;
+                if (currentBulletIndex > 1)
+                {
+                    currentBulletIndex -= 2;
+                }
 
-            currentBulletName = bulletNameArray[_currentBulletIndex];
-            _sr.sprite = playerSpriteArray[_currentBulletIndex];
+                currentSpriteIndex = currentBulletIndex + 1;
+                if (currentSpriteIndex > 2)
+                {
+                    currentSpriteIndex -= 2;
+                }
+                
+                if (currentSpriteIndex == 0)
+                {
+                    currentSpriteIndex = 1;
+                }
+            }
         }
+        else
+        {
+            //When player has all three abilities
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                currentBulletIndex++;
+                if (currentBulletIndex >= bulletNameArray.Length)
+                {
+                    currentBulletIndex -= bulletNameArray.Length;
+                }
+                
+                currentSpriteIndex = currentBulletIndex + 1;
+                if (currentSpriteIndex >= playerSpriteArray.Length)
+                {
+                    currentSpriteIndex -= playerSpriteArray.Length;
+                }
+
+                if (currentSpriteIndex == 0)
+                {
+                    currentSpriteIndex = 1;
+                }
+            }
+        }
+        currentBulletName = bulletNameArray[currentBulletIndex];
+        _sr.sprite = playerSpriteArray[currentSpriteIndex];
     }
 
     // ReSharper disable Unity.PerformanceAnalysis
@@ -323,13 +367,32 @@ public class PlayerController : MonoBehaviour
         transform.position = spawnPoint.position;
         gameObject.SetActive(true);
     }
-    
+
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.transform.CompareTag("CheckPoint") && col.transform.GetComponent<CheckPointScript>().canUnlockBranch)
+        if (col.transform.CompareTag("CheckPoint"))
         {
-            bulletIcon.SetActive(true);
-            abilityChangeIcon.SetActive(true);
+            if (!unlockBranch && col.transform.GetComponent<CheckPointScript>().canUnlockBranch)
+            {
+                unlockBranch = true;
+                Debug.Log("UNLOCK BRANCH");
+                
+                bulletIcon.SetActive(true);
+                abilityChangeIcon.SetActive(true);
+                
+                currentSpriteIndex = 1;
+                _sr.sprite = playerSpriteArray[currentSpriteIndex];   
+            }
+            else if (!unlockWater && col.transform.GetComponent<CheckPointScript>().canUnlockWater)
+            {
+                unlockWater = true;
+                Debug.Log("UNLOCK WATER");
+            }
+            else if (!unlockFire && col.transform.GetComponent<CheckPointScript>().canUnlockFire)
+            {
+                unlockFire = true;
+                Debug.Log("UNLOCK FIRE");
+            }
         }
     }
 
