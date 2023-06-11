@@ -153,8 +153,8 @@ MonoBehaviour:
   waitTimeForChangingDirection: 0.5
   isFrozen: 0
   FrozeTime: 7
-  NormalSprite: {fileID: 0}
-  frozeSprite: {fileID: 0}
+  NormalSprite: {fileID: 21300000, guid: 6bd603690628bd141b84c846fa24a540, type: 3}
+  frozeSprite: {fileID: 21300000, guid: 550d4dbe2cf4a9f4babcac9d492204d3, type: 3}
 --- !u!1 &3673372066570757972
 GameObject:
   m_ObjectHideFlags: 0
