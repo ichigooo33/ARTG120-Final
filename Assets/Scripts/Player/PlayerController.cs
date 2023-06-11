@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 using Quaternion = UnityEngine.Quaternion;
 using Vector2 = UnityEngine.Vector2;
@@ -6,6 +7,11 @@ using Vector3 = UnityEngine.Vector3;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("Cheater Mode")]
+    //Grader mode
+    public bool cheaterMode;
+    
+    [Header("Some useful transform")]
     //Define transforms
     public Transform spawnPoint;
     public Transform firePoint;
@@ -20,6 +26,7 @@ public class PlayerController : MonoBehaviour
     public GameObject bulletIcon;
     public GameObject abilityChangeIcon;
     public BulletIconSelector BulletIconSelectorScript;
+    public TextMeshProUGUI graderModeText;
     
     //Define Variables and Settings
     [Header("Player Variables")]
@@ -78,7 +85,14 @@ public class PlayerController : MonoBehaviour
         //Get player's own components
         _rb = GetComponent<Rigidbody2D>();
         _sr = GetComponent<SpriteRenderer>();
-        
+
+        //Decrease the gravity scale if cheater mode is on
+        if (cheaterMode)
+        {
+            graderModeText.text = "Grader Mode: On";
+            _rb.gravityScale /= 2;
+        }
+
         _GroundAndFireEnmeyLayer = (1 << 3) | (1 << 9);
 
         BulletIconSelectorScript = bulletIcon.GetComponent<BulletIconSelector>();
@@ -98,6 +112,9 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        //Check cheater mode
+        CheaterModeSwitch();
+        
         //Check player's movement input
         CheckMovementInput();
 
@@ -122,6 +139,24 @@ public class PlayerController : MonoBehaviour
         ApplyMovementInput();
     }
 
+    private void CheaterModeSwitch()
+    {
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            cheaterMode = !cheaterMode;
+            if (cheaterMode)
+            {
+                graderModeText.text = "Grader Mode: On";
+                _rb.gravityScale /= 2;
+            }
+            else
+            {
+                graderModeText.text = "Grader Mode: Off";
+                _rb.gravityScale *= 2;
+            }
+        }
+    }
+    
     private void GroundCheck()
     {
         RaycastHit2D groundHitLeft = Physics2D.Raycast(groundCheckRayPoint_Left.position, Vector2.down, 0.5f, _GroundAndFireEnmeyLayer);
@@ -411,6 +446,15 @@ public class PlayerController : MonoBehaviour
         {
             Destroy(col.gameObject);
             fruitCount++;
+        }
+
+        if (cheaterMode)
+        {
+            if (col.transform.CompareTag("Enemy") || col.transform.CompareTag("FireEnemy") ||
+                col.transform.CompareTag("Meteorite"))
+            {
+                return;
+            }
         }
         
         //If player collides with LavaSlime and LavaSlime is frozen, LavaSlime doesn't kill the player
