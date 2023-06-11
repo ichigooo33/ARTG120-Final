@@ -1,8 +1,13 @@
+using System;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // Update is called once per frame
+    private void Start()
+    {
+        Cursor.visible = true;
+    }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))

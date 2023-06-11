@@ -24,7 +24,7 @@ public class FireEnemy : MonoBehaviour
     private bool _isMoving = true;
     private int _moveDirectionIndex = 1;
     private float _frozeTimer;
-    
+
     private void Start()
     {
         _rb2D = GetComponent<Rigidbody2D>();

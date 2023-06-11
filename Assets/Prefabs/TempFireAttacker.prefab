@@ -11,10 +11,11 @@ GameObject:
   - component: {fileID: 145762023128809122}
   - component: {fileID: 145762023128809121}
   - component: {fileID: 145762023128809120}
+  - component: {fileID: 7721594787910319446}
   - component: {fileID: 145762023128809119}
-  - component: {fileID: -5866806804594908114}
+  - component: {fileID: 1457721516750746942}
   m_Layer: 9
-  m_Name: LavaSlime
+  m_Name: TempFireAttacker
   m_TagString: FireEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -114,6 +115,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.58, y: 0.7}
   m_EdgeRadius: 0
+--- !u!58 &7721594787910319446
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 145762023128809117}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 3
 --- !u!50 &145762023128809119
 Rigidbody2D:
   serializedVersion: 4
@@ -135,7 +152,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &-5866806804594908114
+--- !u!114 &1457721516750746942
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -144,17 +161,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 145762023128809117}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a054b2af594c7d4e8cd87aac3f74ce1, type: 3}
+  m_Script: {fileID: 11500000, guid: 9749c5f24708b6441999da9935df3f5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   rayPoint: {fileID: 7201881588136065117}
-  moveSpeed: 4
+  moveSpeed: 2
   waitTimeForChangingDirection: 0.5
+  FrozeTime: 6
   isFrozen: 0
-  FrozeTime: 7
-  NormalSprite: {fileID: 0}
-  frozeSprite: {fileID: 0}
+  isAttacking: 0
+  NormalSprite: {fileID: 21300000, guid: 6bd603690628bd141b84c846fa24a540, type: 3}
+  frozeSprite: {fileID: 21300000, guid: 550d4dbe2cf4a9f4babcac9d492204d3, type: 3}
 --- !u!1 &3673372066570757972
 GameObject:
   m_ObjectHideFlags: 0

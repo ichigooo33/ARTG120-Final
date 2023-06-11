@@ -114,7 +114,7 @@ MonoBehaviour:
   m_Intensity: 0.6
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
-  m_ApplyToSortingLayers: 05ff1122efacdb280d53791500000000
+  m_ApplyToSortingLayers: efacdb280d53791500000000
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -505,6 +505,7 @@ MonoBehaviour:
   bulletNameArray:
   - GrassBullet
   - WaterBullet
+  - FireBullet
 --- !u!114 &-1966026208465847542
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -535,7 +536,7 @@ MonoBehaviour:
   - {x: 0.18963337, y: -0.4811056, z: 0}
   m_ShapePathHash: -1279711391
   m_Mesh: {fileID: 0}
-  m_InstanceId: 96334
+  m_InstanceId: -94616
   m_LocalBounds:
     m_Center: {x: 0.025448918, y: -0.0003067553, z: 0}
     m_Extent: {x: 0.21010864, y: 0.4814126, z: 0}
