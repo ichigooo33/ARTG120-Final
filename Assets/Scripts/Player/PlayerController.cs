@@ -261,7 +261,7 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
-        if (Input.GetButtonDown("Jump") && isGround)
+        if (Input.GetKeyDown(KeyCode.W) && isGround)
         {
             _rb.velocity = new Vector2(_rb.velocity.x, jumpForce);
         }
