@@ -12,11 +12,8 @@ public class BulletIconSelector : MonoBehaviour
         _image = GetComponent<Image>();
     }
 
-    private void Update()
+    public void UpdateIconSprite()
     {
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            _image.sprite = bulletIconArray[PlayerControllerScript.currentBulletIndex];
-        }
+        _image.sprite = bulletIconArray[PlayerControllerScript.currentBulletIndex];
     }
 }

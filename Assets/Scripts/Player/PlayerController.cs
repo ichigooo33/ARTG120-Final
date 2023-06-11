@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     [Header("UI Image")] 
     public GameObject bulletIcon;
     public GameObject abilityChangeIcon;
+    public BulletIconSelector BulletIconSelectorScript;
     
     //Define Variables and Settings
     [Header("Player Variables")]
@@ -79,6 +80,8 @@ public class PlayerController : MonoBehaviour
         _sr = GetComponent<SpriteRenderer>();
         
         _GroundAndFireEnmeyLayer = (1 << 3) | (1 << 9);
+
+        BulletIconSelectorScript = bulletIcon.GetComponent<BulletIconSelector>();
 
         //Set current bullet
         currentBulletName = bulletNameArray[currentBulletIndex];
@@ -250,6 +253,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // ReSharper disable Unity.PerformanceAnalysis
     private void CheckBulletSwap()
     {
         //Return if the player doesn't unlock any ability
@@ -308,6 +312,7 @@ public class PlayerController : MonoBehaviour
         }
         currentBulletName = bulletNameArray[currentBulletIndex];
         _sr.sprite = playerSpriteArray[currentSpriteIndex];
+        BulletIconSelectorScript.UpdateIconSprite();
     }
 
     // ReSharper disable Unity.PerformanceAnalysis
@@ -385,6 +390,7 @@ public class PlayerController : MonoBehaviour
                 
                 currentSpriteIndex = 1;
                 _sr.sprite = playerSpriteArray[currentSpriteIndex];   
+                BulletIconSelectorScript.UpdateIconSprite();
             }
             else if (!unlockWater && col.transform.GetComponent<CheckPointScript>().canUnlockWater)
             {
