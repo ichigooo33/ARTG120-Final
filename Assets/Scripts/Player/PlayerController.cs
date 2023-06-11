@@ -372,6 +372,9 @@ public class PlayerController : MonoBehaviour
     {
         if (col.transform.CompareTag("CheckPoint"))
         {
+            //Update new checkpoint
+            spawnPoint = col.transform;
+            
             if (!unlockBranch && col.transform.GetComponent<CheckPointScript>().canUnlockBranch)
             {
                 unlockBranch = true;

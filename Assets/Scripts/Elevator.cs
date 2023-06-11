@@ -1,14 +1,12 @@
-using System;
 using UnityEngine;
 
 public class Elevator : MonoBehaviour
 {
     public Transform[] destinations;
+    public Transform targetTransform;
     public float moveSpeed = 5f;
     public bool contactPlayer;
-
-    private Transform _targetTransform;
-    private bool _isReadyToMove = true;
+    public bool isReadyToMove = true;
 
     private void Update()
     {
@@ -18,35 +16,40 @@ public class Elevator : MonoBehaviour
 
     private void CheckInput()
     {
-        if (contactPlayer && _isReadyToMove)
+        if (contactPlayer && isReadyToMove)
         {
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
-                _isReadyToMove = false;
-                _targetTransform = destinations[0];
+                isReadyToMove = false;
+                targetTransform = destinations[0];
             }
             else if (Input.GetKeyDown(KeyCode.Alpha2))
             {
-                _isReadyToMove = false;
-                _targetTransform = destinations[1];
+                isReadyToMove = false;
+                targetTransform = destinations[1];
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                isReadyToMove = false;
+                targetTransform = destinations[2];
             }
         }
     }
 
     private void MoveToDestination()
     {
-        if (!_isReadyToMove)
+        if (!isReadyToMove)
         {
             //Check if the elevator has arrived destination
-            if (transform.position == _targetTransform.position)
+            if (transform.position == targetTransform.position)
             {
-                _isReadyToMove = true;
+                isReadyToMove = true;
                 return;
             }
             
             // move sprite towards the target location
             float step = moveSpeed * Time.deltaTime;
-            transform.position = Vector2.MoveTowards(transform.position, _targetTransform.position, step);
+            transform.position = Vector2.MoveTowards(transform.position, targetTransform.position, step);
         }
     }
 

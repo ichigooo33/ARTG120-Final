@@ -12,6 +12,7 @@ TagManager:
   - Platform
   - FireEnemy
   - CheckPoint
+  - Wood
   layers:
   - Default
   - TransparentFX

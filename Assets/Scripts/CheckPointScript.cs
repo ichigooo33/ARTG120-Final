@@ -20,7 +20,7 @@ public class CheckPointScript : MonoBehaviour
         if (col.transform.CompareTag("Player"))
         {
             Debug.Log("CHECK POINT ENTER");
-            PlayerControllerScript.spawnPoint = transform;
+            //PlayerControllerScript.spawnPoint = transform;
         }
     }
 }

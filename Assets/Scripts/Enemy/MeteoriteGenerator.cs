@@ -5,8 +5,9 @@ public class MeteoriteGenerator : MonoBehaviour
 {
     public GameObject meteorite;
     public float generateTime;
-    public float generateRangeMin;
-    public float generateRangeMax;
+    public float generateRangeXMin;
+    public float generateRangeXMax;
+    public float generateHeight = 50;
 
     private float _generateTimer;
 
@@ -17,7 +18,7 @@ public class MeteoriteGenerator : MonoBehaviour
 
         if (_generateTimer >= generateTime)
         {
-            ObjectPool.Instance.GetObject("Meteorite", new Vector3(Random.Range(generateRangeMin, generateRangeMax), 40, 0),
+            ObjectPool.Instance.GetObject("Meteorite", new Vector3(Random.Range(generateRangeXMin, generateRangeXMax), generateHeight, 0),
                 Quaternion.identity);
             _generateTimer = 0;
         }

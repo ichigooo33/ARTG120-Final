@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class FireEnemy : MonoBehaviour
+public class FireEnemyAttacker : MonoBehaviour
 {
     [Header("Transforms for detection")]
     public Transform player;
@@ -12,7 +12,7 @@ public class FireEnemy : MonoBehaviour
     public bool isFrozen = false;
     public float FrozeTime;
 
-    [Header("Sprites")] 
+    [Header("Froze Sprite")] 
     public Sprite NormalSprite;
     public Sprite frozeSprite;
 

@@ -60,10 +60,10 @@ Material:
     m_Floats:
     - _EnableExternalAlpha: 0
     - _ReflectionStrength: 1
-    - _WaterSpeed: 1.5
+    - _WaterSpeed: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _FilterColor: {r: 0.5655013, g: 0.24038802, b: 0.6981132, a: 1}
+    - _FilterColor: {r: 0.47310263, g: 0.39627093, b: 0.6132076, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
