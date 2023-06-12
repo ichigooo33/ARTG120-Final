@@ -78,7 +78,7 @@ public class PlayerController : MonoBehaviour
     
     private Vector2 _mousePos;
     private Ray _fireRay;
-    private float _fireCounter = 0;
+    public float _fireCounter = 0;
     
     private void Start()
     {
@@ -358,7 +358,7 @@ public class PlayerController : MonoBehaviour
     private void Fire()
     {
         //Add time to counter
-        _fireCounter += Time.fixedDeltaTime;
+        _fireCounter += Time.deltaTime;
 
         if (Input.GetMouseButton(0) && _fireCounter > fireCoolDownTime && unlockBranch)
         {
