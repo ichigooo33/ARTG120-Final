@@ -92,6 +92,10 @@ public class PlayerController : MonoBehaviour
             graderModeText.text = "Grader Mode: On";
             _rb.gravityScale /= 2;
         }
+        else
+        {
+            graderModeText.text = "Grader Mode: Off";
+        }
 
         _GroundAndFireEnmeyLayer = (1 << 3) | (1 << 9);
 

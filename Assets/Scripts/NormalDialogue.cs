@@ -1,15 +1,15 @@
 using System.Collections;
 using UnityEngine;
 using TMPro;
-using UnityEngine.SceneManagement;
 
-public class DIalogueBox : MonoBehaviour
+public class NormalDialogue : MonoBehaviour
 {
     public TextMeshProUGUI textComponent;
     public string[] lines;
     public float textSpeed;
 
     private int _index;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -51,14 +51,13 @@ public class DIalogueBox : MonoBehaviour
         else
         {
             textComponent.gameObject.SetActive(false);
-            SceneManager.LoadScene(1);
             gameObject.SetActive(false);
         }
     }
 
     IEnumerator TypeLine()
     {
-        foreach (char c in  lines[_index].ToCharArray())
+        foreach (char c in lines[_index].ToCharArray())
         {
             textComponent.text += c;
             yield return new WaitForSeconds(textSpeed);

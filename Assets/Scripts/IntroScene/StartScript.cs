@@ -11,7 +11,7 @@ public class StartScript : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Return))
         {
             dialogueObj.SetActive(true);
             gameObject.SetActive(false);
